@@ -1,0 +1,83 @@
+/* Plain pages: privacy and the missing page. */
+
+.page {
+  display: grid;
+  gap: clamp(48px, 7vw, 80px);
+  max-width: 860px;
+  padding-top: clamp(36px, 6vw, 80px);
+}
+
+.page__head {
+  display: grid;
+  gap: 20px;
+}
+
+.page h1 {
+  font-size: clamp(2.75rem, 1.6rem + 4.4vw, 5rem);
+}
+
+.page__section {
+  display: grid;
+  gap: 20px;
+}
+
+.page__section h2 {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem);
+}
+
+.page__list {
+  display: grid;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.page__list > div {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 6px 28px;
+  padding-block: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.page__list dt {
+  font-weight: 600;
+}
+
+.page__list dd {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+
+.page__list a {
+  color: var(--text);
+  text-decoration-color: var(--red-line);
+  text-underline-offset: 3px;
+}
+
+.page code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--wash-strong);
+  font-family: var(--font-data);
+  font-size: 0.875em;
+}
+
+@media (max-width: 640px) {
+  .page__list > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.page--missing {
+  gap: 24px;
+  min-height: 52vh;
+  align-content: center;
+}
+
+.page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}

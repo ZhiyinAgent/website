@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>document.documentElement.classList.add("js")</script>
+    <title>Zhiyin: an AI agent for your PC</title>
+    <meta
+      name="description"
+      content="Tell it what you need in plain words. Zhiyin does the work in a folder you choose, and asks before it changes anything. Free and open source, for Windows."
+    />
+    <link rel="canonical" href="https://zhiyinagent.app/" />
+    <link rel="preconnect" href="https://media.zhiyinagent.app" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#1b1c1e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f4f2" media="(prefers-color-scheme: light)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Zhiyin" />
+    <meta property="og:title" content="Zhiyin: an AI agent for your PC" />
+    <meta
+      property="og:description"
+      content="Tell it what you need in plain words. It does the work in a folder you choose, and asks before it changes anything."
+    />
+    <meta property="og:url" content="https://zhiyinagent.app/" />
+    <meta property="og:image" content="https://zhiyinagent.app/og.png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="module" src="/src/scripts/home.ts"></script>
+  </head>
+  <body>
+    <!-- @partial sprite -->
+    <!-- @partial header -->
+
+    <main id="main">
+      <!-- The hero: the promise, over a qin's seven strings that ripple like
+           water under the words and rise into mountains beyond them, as in
+           the story of the name. The trailer follows the hero. -->
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas class="strings hero__strings" aria-hidden="true" data-landscape></canvas>
+        <div class="wrap">
+          <div class="hero__copy">
+            <p class="hero__tag mono">
+              <span class="hero__dot" aria-hidden="true"></span>
+              Developer preview %VITE_RELEASE_VERSION%
+            </p>
+            <h1 id="hero-title" class="hero__title" data-words>
+              An AI agent for <em>your PC.</em>
+            </h1>
+            <p class="lead hero__lead">
+              Tell it what you need in plain words. Zhiyin does the work in a
+              folder you choose, and asks before it changes anything.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--red button--large" href="%VITE_RELEASE_URL%">
+                <svg aria-hidden="true"><use href="#i-download" /></svg>
+                Download for Windows
+              </a>
+              <button class="button button--large button--ghost" type="button" data-film-sound>
+                <svg aria-hidden="true"><use href="#i-play" /></svg>
+                Watch the trailer
+                <span class="button__note mono">0:55</span>
+              </button>
+            </div>
+            <p class="hero__meta">
+              Free and open source · <span class="nowrap">64-bit Windows</span> ·
+              <span class="nowrap">%VITE_RELEASE_SIZE%</span>
+            </p>
+          </div>
+        </div>
+        <a class="hero__more" href="#film">
+          See it work
+          <svg aria-hidden="true"><use href="#i-arrow-down" /></svg>
+        </a>
+      </section>
+
+      <!-- The trailer, playing quietly; with sound on request. On a large
+           window it arrives as the page scrolls past the words, grows to fill
+           the window and holds there while it plays. -->
+      <section class="theatre" id="film" aria-label="The trailer" data-theatre>
+        <div class="theatre__pin">
+          <div class="wrap stage">
+            <figure class="film" data-film>
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="/media/zhiyin-demo-poster.webp"
+                width="1920"
+                height="1080"
+                aria-label="The Zhiyin trailer"
+              >
+                <source src="/media/zhiyin-demo.mp4" type="video/mp4" />
+              </video>
+              <button class="film__sound" type="button" data-film-sound>
+                <svg aria-hidden="true"><use href="#i-play" /></svg>
+                <span>Play with sound</span>
+              </button>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- A string between sections, plucked as it comes into view. -->
+      <div class="wrap break" aria-hidden="true"><canvas class="strings" data-break></canvas></div>
+
+      <!-- How it works: the story on the left, the app on the right. -->
+      <section class="story" aria-labelledby="story-title">
+        <div class="wrap">
+          <header class="section-head" data-reveal>
+            <h2 id="story-title">One request, <em>start to finish.</em></h2>
+            <p class="lead">
+              Recorded in the app for the trailer: a three-day trip to
+              Shanghai for a sister's thirtieth, planned on a €800 budget.
+            </p>
+          </header>
+
+          <div class="story__grid">
+            <ol class="story__steps">
+              <li class="story__step" data-clip="ask">
+                <h3>You ask, in plain words.</h3>
+                <p>Type what you need the way you would say it, choose the folder it works in, and send.</p>
+              </li>
+              <li class="story__step" data-clip="questions">
+                <h3>It asks what it needs to know.</h3>
+                <p>When a choice would change the work, it asks a few short questions instead of guessing.</p>
+              </li>
+              <li class="story__step" data-clip="work">
+                <h3>It works, and shows its work.</h3>
+                <p>It searches, reads, adds up and draws. Every step is listed with what it was for and how it went.</p>
+              </li>
+              <li class="story__step" data-clip="question">
+                <h3>It asks before it changes anything.</h3>
+                <p>Before it edits a file, runs a command or uses an online service, it stops and waits for you.</p>
+              </li>
+              <li class="story__step" data-clip="change">
+                <h3>You see each change, line by line.</h3>
+                <p>Open the file to read exactly what will change before you decide. Deleting a file, running a command and running Python always ask.</p>
+              </li>
+              <li class="story__step" data-clip="allow">
+                <h3>Allow it, and get the result.</h3>
+                <p>Allow it once, or for the rest of the conversation. The finished PDF opens beside the conversation.</p>
+              </li>
+              <li class="story__step" data-clip="go-back">
+                <h3>Changed your mind? Go back.</h3>
+                <p>Edit an earlier message and send it again. The files it changed go back as they were.</p>
+              </li>
+            </ol>
+
+            <!-- One screen for the whole story: the step being read plays in
+                 it. On a narrow window it moves under each step instead. -->
+            <div class="story__screen" data-screen>
+              <figure class="screen">
+                <video data-clip="ask" muted playsinline preload="none" poster="/media/clips/ask.webp" width="1600" height="900" aria-label="A request typed into Zhiyin"><source src="/media/clips/ask.mp4" type="video/mp4" /></video>
+                <video data-clip="questions" data-sped muted playsinline preload="none" poster="/media/clips/questions.webp" width="1600" height="900" aria-label="Zhiyin asking three short questions, answered one by one"><source src="/media/clips/questions.mp4" type="video/mp4" /></video>
+                <video data-clip="work" data-sped muted playsinline preload="none" poster="/media/clips/work.webp" width="1600" height="900" aria-label="Zhiyin researching and drawing the budget chart"><source src="/media/clips/work.mp4" type="video/mp4" /></video>
+                <video data-clip="question" muted playsinline preload="none" poster="/media/clips/question.webp" width="1600" height="900" aria-label="Zhiyin asking before it edits a file, and the file opened"><source src="/media/clips/question.mp4" type="video/mp4" /></video>
+                <video data-clip="change" muted playsinline preload="none" poster="/media/clips/change.webp" width="1600" height="900" aria-label="The change to the file, line by line"><source src="/media/clips/change.mp4" type="video/mp4" /></video>
+                <video data-clip="allow" data-sped muted playsinline preload="none" poster="/media/clips/allow.webp" width="1600" height="900" aria-label="Allow once pressed, and the finished PDF beside the conversation"><source src="/media/clips/allow.mp4" type="video/mp4" /></video>
+                <video data-clip="go-back" data-sped muted playsinline preload="none" poster="/media/clips/go-back.webp" width="1600" height="900" aria-label="The first message edited and sent again, going back with the files"><source src="/media/clips/go-back.mp4" type="video/mp4" /></video>
+              </figure>
+              <div class="story__bar">
+                <ol class="story__progress" aria-hidden="true">
+                  <li data-clip="ask"></li>
+                  <li data-clip="questions"></li>
+                  <li data-clip="work"></li>
+                  <li data-clip="question"></li>
+                  <li data-clip="change"></li>
+                  <li data-clip="allow"></li>
+                  <li data-clip="go-back"></li>
+                </ol>
+                <span class="story__sped">Sped up</span>
+                <button class="button button--small button--ghost story__replay" type="button" data-replay>
+                  <svg aria-hidden="true"><use href="#i-rewind" /></svg>
+                  Replay
+                </button>
+                <button class="button button--small button--ghost story__next" type="button" data-next>
+                  <span data-next-label>Next step</span>
+                  <svg aria-hidden="true"><use href="#i-arrow-down" /></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- A string between sections, plucked as it comes into view. -->
+      <div class="wrap break" aria-hidden="true"><canvas class="strings" data-break></canvas></div>
+
+      <!-- Other work: real runs, with what each one cost. -->
+      <section class="runs wrap" id="runs" aria-labelledby="runs-title">
+        <header class="section-head" data-reveal>
+          <h2 id="runs-title">One app, <em>all kinds of work.</em></h2>
+          <p class="lead">
+            Four more requests, each run once with a low-cost model and
+            recorded from start to finish. Here is what Zhiyin did, and what
+            each whole run cost.
+          </p>
+        </header>
+
+        <div class="runs__grid">
+          <article class="run run--wide" data-reveal>
+            <figure class="screen" data-run data-long="/media/clips/bakery-long.mp4" data-long-note="Up to 3× faster while it works">
+              <video data-sped muted playsinline preload="none" poster="/media/clips/bakery.webp" data-end-poster="/media/clips/bakery-end.webp" width="1600" height="900" aria-label="Zhiyin building a bakery's website and checking it in its own browser"><source src="/media/clips/bakery.mp4" type="video/mp4" /></video>
+              <button class="screen__open" type="button" data-open-long>
+                <svg aria-hidden="true"><use href="#i-expand" /></svg>
+                Watch larger
+              </button>
+            </figure>
+            <div class="run__body">
+              <p class="run__ask">Make my bakery a website.</p>
+              <p class="run__did">
+                Asked what the bakery is like, wrote the page and its styles,
+                then opened it in its own browser to check how it looks.
+              </p>
+              <p class="run__cost"><strong>$0.035</strong> for the whole run</p>
+            </div>
+          </article>
+
+          <article class="run" data-reveal>
+            <figure class="screen" data-run data-long="/media/clips/research-long.mp4" data-long-note="Up to 6× faster while it researches">
+              <video data-sped muted playsinline preload="none" poster="/media/clips/research.webp" data-end-poster="/media/clips/research-end.webp" width="1600" height="900" aria-label="Zhiyin researching heat pumps and having a fact-checker verify the figures"><source src="/media/clips/research.mp4" type="video/mp4" /></video>
+              <button class="screen__open" type="button" data-open-long>
+                <svg aria-hidden="true"><use href="#i-expand" /></svg>
+                Watch larger
+              </button>
+            </figure>
+            <div class="run__body">
+              <p class="run__ask">
+                We're thinking about a heat pump for our 1970s house near Lyon.
+                Is it worth it in 2026, and what help can we get? Please
+                double-check the numbers.
+              </p>
+              <p class="run__did">
+                Asked a few questions, searched and read the sources, and had a
+                fact-checker verify the figures before it answered.
+              </p>
+              <p class="run__cost"><strong>$0.13</strong> for the whole run</p>
+            </div>
+          </article>
+
+          <article class="run" data-reveal>
+            <figure class="screen" data-run data-long="/media/clips/money-long.mp4" data-long-note="Up to 2× faster while it works">
+              <video data-sped muted playsinline preload="none" poster="/media/clips/money.webp" data-end-poster="/media/clips/money-end.webp" width="1600" height="900" aria-label="Zhiyin charting a year of spending"><source src="/media/clips/money.mp4" type="video/mp4" /></video>
+              <button class="screen__open" type="button" data-open-long>
+                <svg aria-hidden="true"><use href="#i-expand" /></svg>
+                Watch larger
+              </button>
+            </figure>
+            <div class="run__body">
+              <p class="run__ask">Where did our money go this year? Show me in a chart.</p>
+              <p class="run__did">
+                Read a year of bank transactions and charted the spending by
+                category and by month.
+              </p>
+              <p class="run__cost"><strong>$0.0104</strong> for the whole run</p>
+            </div>
+          </article>
+
+          <article class="run run--wide" data-reveal>
+            <figure class="screen" data-run data-long="/media/clips/study-long.mp4" data-long-note="2× faster while it works">
+              <video data-sped muted playsinline preload="none" poster="/media/clips/study.webp" data-end-poster="/media/clips/study-end.webp" width="1600" height="900" aria-label="A ten-question quiz on the water cycle, answered and scored"><source src="/media/clips/study.mp4" type="video/mp4" /></video>
+              <button class="screen__open" type="button" data-open-long>
+                <svg aria-hidden="true"><use href="#i-expand" /></svg>
+                Watch larger
+              </button>
+            </figure>
+            <div class="run__body">
+              <p class="run__ask">Quiz me on chapter 4 before my exam.</p>
+              <p class="run__did">
+                Read the chapter, wrote a ten-question quiz, then scored the
+                answers and explained each one.
+              </p>
+              <p class="run__cost"><strong>$0.0066</strong> for the whole run</p>
+            </div>
+          </article>
+        </div>
+        <p class="runs__note" data-reveal>
+          Each run used <span class="mono">deepseek/deepseek-v4.1-flash</span>
+          through OpenRouter. The costs are what OpenRouter reported for it.
+        </p>
+      </section>
+
+      <!-- What each recording shows over its footage: copied by the script. -->
+      <template id="screen-controls">
+        <div class="screen__controls">
+          <button class="screen__replay" type="button">
+            <svg aria-hidden="true"><use href="#i-rewind" /></svg>
+            Replay
+          </button>
+          <span class="screen__sped">Sped up</span>
+        </div>
+      </template>
+
+      <!-- A run, large and slower, over the page. -->
+      <dialog class="viewer" aria-labelledby="viewer-title" data-viewer>
+        <div class="viewer__bar">
+          <div class="viewer__text">
+            <p class="viewer__ask" id="viewer-title" data-viewer-ask></p>
+            <p class="viewer__note" data-viewer-note></p>
+          </div>
+          <button class="viewer__close" type="button" data-viewer-close>
+            <svg aria-hidden="true"><use href="#i-x" /></svg>
+            <span class="visually-hidden">Close</span>
+          </button>
+        </div>
+        <video class="viewer__video" controls muted playsinline preload="none" width="1920" height="1080"></video>
+      </dialog>
+
+      <!-- A string between sections, plucked as it comes into view. -->
+      <div class="wrap break" aria-hidden="true"><canvas class="strings" data-break></canvas></div>
+
+      <!-- Plugins: the four that come with the app, with what they connect to. -->
+      <section class="plugins wrap" aria-labelledby="plugins-title">
+        <div class="section-head" data-reveal>
+          <h2 id="plugins-title">Turn on the <span class="nowrap">know-how</span> <em>you need.</em></h2>
+          <p class="lead">
+            A plugin brings the skills and tools for one kind of work. Four
+            come with Zhiyin. Each one you turn on is used only when a task
+            calls for it.
+          </p>
+        </div>
+
+        <ul class="plugin-list" data-reveal>
+          <li class="plugin">
+            <div class="plugin__text">
+              <h3>Deep Research &amp; Synthesis</h3>
+              <p>Researches a question across many sources and writes a report with citations.</p>
+              <p class="plugin__uses"><span>Tavily web search</span></p>
+            </div>
+            <span class="switch" data-on aria-hidden="true"><i></i></span>
+          </li>
+          <li class="plugin">
+            <div class="plugin__text">
+              <h3>Data Science &amp; Business Intelligence</h3>
+              <p>Explores, cleans and explains data, in a Python environment of its own.</p>
+              <p class="plugin__uses"><span>Python</span></p>
+            </div>
+            <span class="switch" data-on aria-hidden="true"><i></i></span>
+          </li>
+          <li class="plugin">
+            <div class="plugin__text">
+              <h3>Technical &amp; Academic Publishing</h3>
+              <p>Writes and typesets papers and reports with sound citations, and compiles them to PDF.</p>
+              <p class="plugin__uses"><span>alphaXiv</span></p>
+            </div>
+            <span class="switch" aria-hidden="true"><i></i></span>
+          </li>
+          <li class="plugin">
+            <div class="plugin__text">
+              <h3>Full-Stack Software Engineering</h3>
+              <p>Designs, builds, tests and reviews software, with a browser for testing pages.</p>
+              <p class="plugin__uses"><span>Git</span><span>GitHub</span></p>
+            </div>
+            <span class="switch" aria-hidden="true"><i></i></span>
+          </li>
+        </ul>
+        <p class="plugins__more" data-reveal>
+          You can also make your own, with skills, specialists and connectors
+          to online services.
+        </p>
+      </section>
+
+      <!-- A string between sections, plucked as it comes into view. -->
+      <div class="wrap break" aria-hidden="true"><canvas class="strings" data-break></canvas></div>
+
+      <!-- Cost: what is free, and what is paid to whom. -->
+      <section class="cost wrap" aria-labelledby="cost-title">
+        <div class="section-head" data-reveal>
+          <h2 id="cost-title">The app is free.<br /><em>You pay for the AI you use.</em></h2>
+          <p class="lead">
+            You choose the AI model and pay its provider directly, for what you
+            use. Zhiyin keeps each request lean, so long tasks stay cheap, and
+            shows what every conversation cost.
+          </p>
+        </div>
+        <dl class="ledger" data-reveal>
+          <div class="ledger__row">
+            <dt>Zhiyin</dt>
+            <dd>Free and open source, under the Apache License 2.0.</dd>
+            <dd class="ledger__figure">$0</dd>
+          </div>
+          <div class="ledger__row">
+            <dt>The AI model</dt>
+            <dd>
+              Pay as you go through OpenRouter, one account for models from many
+              companies. $5 of credit is enough to start.
+            </dd>
+            <dd class="ledger__figure">from $5</dd>
+          </div>
+          <div class="ledger__row">
+            <dt>Web search</dt>
+            <dd>
+              Tavily's free plan gives 1,000 credits a month, with no card
+              needed. A basic search uses one.
+            </dd>
+            <dd class="ledger__figure">free</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- The name, and the instrument it comes from. -->
+      <section class="name" aria-labelledby="name-title">
+        <div class="wrap name__grid" data-reveal>
+          <p class="name__glyphs" lang="zh-Hans" aria-hidden="true">知音</p>
+          <div class="name__text">
+            <h2 id="name-title" class="label">Why “Zhiyin”</h2>
+            <p class="name__gloss"><span class="mono">zhīyīn</span>, one who knows the tune</p>
+            <p>
+              Bo Ya played the qin, and his friend Zhong Ziqi understood every
+              piece: when the music turned to high mountains, he heard the
+              mountains, and when it turned to flowing water, he heard the
+              river. The word came to mean a friend who understands what you
+              mean. That is what Zhiyin is for.
+            </p>
+          </div>
+        </div>
+        <div class="wrap name__qin" aria-hidden="true"><canvas class="strings" data-qin></canvas></div>
+      </section>
+
+      <!-- A string between sections, plucked as it comes into view. -->
+      <div class="wrap break" aria-hidden="true"><canvas class="strings" data-break></canvas></div>
+
+      <!-- Open source, and how to check a download. -->
+      <section class="open wrap" aria-labelledby="open-title">
+        <div class="open__grid">
+          <div data-reveal>
+            <h2 id="open-title">Open source, <em>and checkable.</em></h2>
+            <p class="lead">
+              Every line is on GitHub. Each installer is built by GitHub from
+              the tagged source, and published with its SHA-256 and a build
+              record you can verify yourself.
+            </p>
+            <a class="button" href="https://github.com/ZhiyinAgent/Zhiyin">
+              <svg aria-hidden="true"><use href="#i-github" /></svg>
+              View the source
+            </a>
+          </div>
+          <figure class="terminal" data-reveal>
+            <figcaption class="label">Check where the installer came from</figcaption>
+            <pre class="mono"><span class="terminal__prompt">PS&gt;</span> gh attestation verify .\Zhiyin-Setup-%VITE_RELEASE_VERSION%.exe --repo ZhiyinAgent/Zhiyin</pre>
+          </figure>
+        </div>
+      </section>
+
+      <!-- A string between sections, plucked as it comes into view. -->
+      <div class="wrap break" aria-hidden="true"><canvas class="strings" data-break></canvas></div>
+
+      <!-- Last call, and the strings at rest. -->
+      <section class="closing" aria-labelledby="closing-title">
+        <div class="wrap closing__inner" data-reveal>
+          <svg class="closing__mark" aria-hidden="true"><use href="#i-mark" /></svg>
+          <h2 id="closing-title">Give it <em>something to do.</em></h2>
+          <div class="closing__actions">
+            <a class="button button--red button--large" href="%VITE_RELEASE_URL%">
+              <svg aria-hidden="true"><use href="#i-download" /></svg>
+              Download for Windows
+            </a>
+            <a class="button button--large" href="/guide/">Read the setup guide</a>
+          </div>
+          <p class="closing__note">
+            The installer is not code-signed yet, so Windows asks you to confirm:
+            choose <span class="ui">More info</span>, then
+            <span class="ui">Run anyway</span>.
+          </p>
+        </div>
+        <canvas class="strings closing__strings" aria-hidden="true" data-water></canvas>
+      </section>
+    </main>
+
+    <!-- @partial footer -->
+  </body>
+</html>

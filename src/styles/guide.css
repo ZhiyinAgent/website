@@ -1,0 +1,539 @@
+.guide-hero {
+  display: grid;
+  gap: 20px;
+  padding-block: clamp(36px, 6vw, 80px) clamp(40px, 6vw, 72px);
+}
+
+.guide-hero h1 {
+  max-width: 14em;
+  font-size: clamp(2.75rem, 1.6rem + 4.4vw, 5.25rem);
+}
+
+.needs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.needs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-raised);
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+}
+
+.needs svg {
+  width: 16px;
+  height: 16px;
+  color: var(--green);
+}
+
+/* ---- Layout: the steps beside their list ------------------------------- */
+
+.guide__layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+
+.toc {
+  position: sticky;
+  top: 88px;
+  display: grid;
+  gap: 18px;
+}
+
+.toc ol {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.toc li {
+  counter-increment: step;
+}
+
+.toc a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+  padding: 0 12px 0 8px;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.toc ol a::before {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  content: counter(step);
+}
+
+.toc a:hover {
+  background: var(--wash);
+  color: var(--text);
+}
+
+.toc a[aria-current="step"] {
+  background: var(--wash);
+  color: var(--text);
+}
+
+.toc a[aria-current="step"]::before {
+  border-color: var(--red-fill);
+  background: var(--red-fill);
+  color: var(--on-red);
+}
+
+.toc__extra {
+  padding-left: 12px;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+  .guide__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .toc {
+    display: none;
+  }
+}
+
+/* ---- One step ---------------------------------------------------------- */
+
+.steps-flow {
+  display: grid;
+  gap: clamp(56px, 8vw, 96px);
+  min-width: 0;
+}
+
+.step {
+  display: grid;
+  gap: 20px;
+  max-width: 760px;
+}
+
+.step__head {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+/* The step's number, as the app's display face sets a figure. */
+.step__number {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--red-fill);
+  color: var(--on-red);
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-stretch: 87.5%;
+  font-weight: 700;
+}
+
+.step h2,
+.trouble h2 {
+  font-size: clamp(1.875rem, 1.4rem + 1.8vw, 2.625rem);
+}
+
+.step__intro,
+.step > p {
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.step__define {
+  padding: 14px 18px;
+  border-left: 3px solid var(--red);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--red-soft);
+}
+
+.step__sub {
+  margin-top: 8px;
+}
+
+.step__note {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.step a:not(.button),
+.trouble a {
+  color: var(--text);
+  text-decoration-color: var(--red-line);
+  text-underline-offset: 3px;
+}
+
+.step a:not(.button):hover,
+.trouble a:hover {
+  text-decoration-color: var(--red);
+}
+
+code,
+kbd {
+  font-family: var(--font-data);
+  font-size: 0.875em;
+}
+
+code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--wash-strong);
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0 6px;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--panel-raised);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.ui--red {
+  border-color: var(--red-fill);
+  background: var(--red-fill);
+  color: var(--on-red);
+}
+
+.ui--green {
+  border-color: var(--green-line);
+  background: var(--green-fill);
+  color: var(--green);
+}
+
+/* Numbered substeps: the order is the order you do them in. */
+.step__list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: sub;
+}
+
+.step__list > li {
+  position: relative;
+  padding-left: 42px;
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  counter-increment: sub;
+}
+
+.step__list > li::before {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-data);
+  font-size: 0.8125rem;
+  content: counter(sub);
+}
+
+.aside {
+  display: grid;
+  gap: 10px;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-raised);
+}
+
+.aside h3 {
+  font-size: 1rem;
+}
+
+.aside ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 1.1em;
+  color: var(--text-soft);
+}
+
+.checked {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+/* ---- The Windows warning, drawn plainly so it is recognised ------------ */
+
+.smartscreen {
+  display: grid;
+  gap: 10px;
+  max-width: 460px;
+  margin: 4px 0 0;
+}
+
+.smartscreen__panel {
+  display: grid;
+  gap: 10px;
+  padding: 22px 24px 18px;
+  border-radius: 6px;
+  background: var(--smartscreen);
+  color: var(--smartscreen-ink);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.smartscreen__title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.smartscreen__link {
+  text-decoration: underline;
+}
+
+.smartscreen__app {
+  opacity: 0.85;
+}
+
+.smartscreen__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.smartscreen__buttons span {
+  min-width: 96px;
+  padding: 5px 14px;
+  border: 1px solid var(--smartscreen-line);
+  text-align: center;
+}
+
+/* The button to look for, ringed in the brand red. */
+.smartscreen__run {
+  outline: 2px solid var(--smartscreen-ring);
+  outline-offset: 3px;
+}
+
+.smartscreen figcaption {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* ---- Facts, services and the featured connector ------------------------ */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fact,
+.service {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-raised);
+}
+
+.fact h3,
+.service h3 {
+  font-size: 1rem;
+}
+
+.fact p,
+.service p {
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 760px) {
+  .facts,
+  .services {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.feature-card {
+  display: grid;
+  gap: 18px;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--red-line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(80% 120% at 100% 0%, var(--red-soft), transparent 60%),
+    var(--panel-raised);
+}
+
+.feature-card > p {
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.feature-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+
+.feature-card__head h3 {
+  font-size: 1.375rem;
+}
+
+.feature-card__badge {
+  padding: 4px 12px;
+  border: 1px solid var(--green-line);
+  border-radius: 999px;
+  background: var(--green-fill);
+  color: var(--green);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.plugin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plugin-grid li {
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-raised);
+}
+
+.plugin-grid h3 {
+  font-size: 1rem;
+}
+
+.plugin-grid p {
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .plugin-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.decisions {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.decisions > div {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 8px 24px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.decisions dd {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .decisions > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- Trouble ----------------------------------------------------------- */
+
+.trouble {
+  display: grid;
+  gap: 20px;
+  max-width: 760px;
+  padding: clamp(24px, 4vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--ground-deep);
+}
+
+.trouble__list {
+  display: grid;
+  margin: 0;
+}
+
+.trouble__list > div {
+  display: grid;
+  gap: 6px;
+  padding-block: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.trouble__list dt {
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.trouble__list dd {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.trouble__more {
+  color: var(--muted);
+}

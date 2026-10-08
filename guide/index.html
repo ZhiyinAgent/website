@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>document.documentElement.classList.add("js")</script>
+    <title>Setup guide · Zhiyin</title>
+    <meta
+      name="description"
+      content="Set Zhiyin up in a few minutes: install it, connect an AI model through OpenRouter, choose a folder, turn on plugins and add free web search."
+    />
+    <link rel="canonical" href="https://zhiyinagent.app/guide/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#1b1c1e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f4f2" media="(prefers-color-scheme: light)" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Zhiyin" />
+    <meta property="og:title" content="Set up Zhiyin in a few minutes" />
+    <meta
+      property="og:description"
+      content="Install, connect an AI model through OpenRouter, choose a folder, turn on plugins and add free web search."
+    />
+    <meta property="og:url" content="https://zhiyinagent.app/guide/" />
+    <meta property="og:image" content="https://zhiyinagent.app/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="module" src="/src/scripts/guide.ts"></script>
+  </head>
+  <body>
+    <!-- @partial sprite -->
+    <!-- @partial header -->
+
+    <main id="main" class="guide">
+      <header class="guide-hero wrap">
+        <p class="label">Setup guide</p>
+        <h1>From download to <em>your first task.</em></h1>
+        <p class="lead">
+          Six short steps. You need a Windows PC and, for the AI itself, about
+          $5 of credit. Web search has a free monthly allowance.
+        </p>
+        <ul class="needs" aria-label="What you need">
+          <li>
+            <svg aria-hidden="true"><use href="#i-check" /></svg>
+            A 64-bit Windows PC
+          </li>
+          <li>
+            <svg aria-hidden="true"><use href="#i-check" /></svg>
+            An OpenRouter account with $5 of credit
+          </li>
+          <li>
+            <svg aria-hidden="true"><use href="#i-check" /></svg>
+            A free Tavily key, for web search
+          </li>
+        </ul>
+      </header>
+
+      <div class="wrap guide__layout">
+        <nav class="toc" aria-label="Steps">
+          <ol>
+            <li><a href="#install">Install Zhiyin</a></li>
+            <li><a href="#model">Connect an AI model</a></li>
+            <li><a href="#folder">Choose a folder</a></li>
+            <li><a href="#plugins">Turn on plugins</a></li>
+            <li><a href="#search">Add web search</a></li>
+            <li><a href="#work">Give it a task</a></li>
+          </ol>
+          <a class="toc__extra" href="#trouble">If something goes wrong</a>
+        </nav>
+
+        <div class="steps-flow">
+          <!-- 1 -->
+          <section class="step" id="install" aria-labelledby="install-title">
+            <header class="step__head">
+              <span class="step__number" aria-hidden="true">1</span>
+              <h2 id="install-title">Install Zhiyin</h2>
+            </header>
+            <ol class="step__list">
+              <li>
+                <a href="%VITE_RELEASE_URL%">Download the installer</a>
+                (%VITE_RELEASE_SIZE%), or take it from the newest release on the
+                <a href="https://github.com/ZhiyinAgent/Zhiyin/releases">Releases page</a>.
+              </li>
+              <li>
+                Open the downloaded file. Windows shows “Windows protected your
+                PC”, because the installer is not code-signed yet. Select
+                <span class="ui">More info</span>, then
+                <span class="ui">Run anyway</span>.
+              </li>
+              <li>Follow the installer's steps.</li>
+              <li>
+                When Zhiyin first opens, it asks what you plan to use it for.
+                Select the cards that fit, then
+                <span class="ui">Make it yours</span>, or
+                <span class="ui">Start exploring</span> to skip.
+              </li>
+            </ol>
+
+            <figure class="smartscreen" aria-label="What the Windows warning looks like">
+              <div class="smartscreen__panel">
+                <p class="smartscreen__title">Windows protected your PC</p>
+                <p>
+                  Microsoft Defender SmartScreen prevented an unrecognized app
+                  from starting.
+                </p>
+                <p class="smartscreen__link">More info</p>
+                <p class="smartscreen__app">
+                  App: Zhiyin-Setup-%VITE_RELEASE_VERSION%.exe
+                </p>
+                <div class="smartscreen__buttons">
+                  <span class="smartscreen__run">Run anyway</span>
+                  <span>Don't run</span>
+                </div>
+              </div>
+              <figcaption>
+                Select <strong>More info</strong> first; <strong>Run anyway</strong>
+                appears after it.
+              </figcaption>
+            </figure>
+
+            <aside class="aside">
+              <h3>Two free programs it also uses</h3>
+              <ul>
+                <li>
+                  <strong>Edge or Chrome</strong>, to open web pages. Edge comes
+                  with Windows.
+                </li>
+                <li>
+                  <a href="https://git-scm.com/download/win"><strong>Git for Windows</strong></a>,
+                  to run shell commands (commands typed for Windows to carry
+                  out) and to work with Git.
+                </li>
+              </ul>
+            </aside>
+          </section>
+
+          <!-- 2 -->
+          <section class="step" id="model" aria-labelledby="model-title">
+            <header class="step__head">
+              <span class="step__number" aria-hidden="true">2</span>
+              <h2 id="model-title">Connect an AI model through OpenRouter</h2>
+            </header>
+            <p class="step__intro">
+              The thinking behind Zhiyin is done by an AI model, which runs on
+              a company's servers.
+              <a href="https://openrouter.ai">OpenRouter</a> gives you access
+              to many AI models from different companies with one account. You
+              buy credit in advance, and each request Zhiyin sends uses a
+              little of it, depending on the model.
+            </p>
+            <p class="step__define">
+              <strong>An API key</strong> is like a password that lets Zhiyin
+              use your OpenRouter account.
+            </p>
+            <ol class="step__list">
+              <li>Create an account at <a href="https://openrouter.ai">openrouter.ai</a>.</li>
+              <li>
+                Add credit on the
+                <a href="https://openrouter.ai/settings/credits">Credits page</a>.
+                $5 is enough to start.
+              </li>
+              <li>
+                In Zhiyin, open the Model page: select
+                <span class="ui">•••</span> next to
+                <span class="ui">Your preferences</span> at the bottom of the
+                sidebar, then <span class="ui">Model</span>. Or press
+                <kbd>Ctrl</kbd>&thinsp;+&thinsp;<kbd>,</kbd>.
+              </li>
+              <li>
+                Select <span class="ui">Add a key</span>.
+                <span class="ui">Get a key on OpenRouter</span> opens the page
+                where keys are made. Create one there and copy it: it starts
+                with <code>sk-or-v1-</code>.
+              </li>
+              <li>
+                Paste it under <span class="ui">Paste your key</span> and select
+                <span class="ui">Save key</span>. Zhiyin keeps it in Windows
+                Credential Manager, where Windows keeps passwords, and sends it
+                only to OpenRouter.
+              </li>
+              <li>
+                Choose a model in the list, then select
+                <span class="ui">Save</span> at the top of the page. Leave
+                <span class="ui">Any provider</span> ticked, as the page
+                recommends.
+              </li>
+            </ol>
+
+            <div class="facts">
+              <div class="fact">
+                <h3>Reading the prices</h3>
+                <p>
+                  Each model shows two prices per million tokens: what Zhiyin
+                  sends (“in”) and what the model writes (“out”). A token is a
+                  small piece of a word. <span class="ui">Order by</span> and
+                  filters such as <span class="ui">Lower cost</span> help you
+                  compare.
+                </p>
+              </div>
+              <div class="fact">
+                <h3>Buying credit</h3>
+                <p>
+                  One purchase is between $5 and $25,000. Paying by card adds a
+                  5.5% fee, at least $0.80. Unused credit may expire 365 days
+                  after you buy it.
+                </p>
+              </div>
+              <div class="fact">
+                <h3>Free models</h3>
+                <p>
+                  Models whose name ends in “(free)” cost nothing, within limits:
+                  50 requests a day, or 1,000 a day once you have bought $10 of
+                  credit, and 20 a minute. One task can take many requests, so
+                  $5 of credit is the simpler start.
+                </p>
+              </div>
+            </div>
+            <p class="checked">Prices and limits checked on 8 October 2026.</p>
+          </section>
+
+          <!-- 3 -->
+          <section class="step" id="folder" aria-labelledby="folder-title">
+            <header class="step__head">
+              <span class="step__number" aria-hidden="true">3</span>
+              <h2 id="folder-title">Choose a folder</h2>
+            </header>
+            <p class="step__intro">
+              Zhiyin works in one folder at a time, and reads the files in it
+              without asking. For a first try, a new empty folder works well.
+            </p>
+            <ol class="step__list">
+              <li>
+                In the message box at the bottom of the window, select
+                <span class="ui">Choose a folder</span>.
+              </li>
+              <li>
+                Select <span class="ui">Choose a folder…</span> and pick the
+                folder in the window that opens. The same button switches
+                folders later.
+              </li>
+            </ol>
+          </section>
+
+          <!-- 4 -->
+          <section class="step" id="plugins" aria-labelledby="plugins-title">
+            <header class="step__head">
+              <span class="step__number" aria-hidden="true">4</span>
+              <h2 id="plugins-title">Turn on plugins</h2>
+            </header>
+            <p class="step__intro">
+              A plugin adds know-how and tools for one kind of work. Select
+              <span class="ui">Plugins</span> at the top of the sidebar, select
+              a plugin, and use the switch beside its name to turn it on or
+              off. The cards you chose on the first screen turned on the
+              matching plugins. A plugin that is on is used only when a task
+              needs it.
+            </p>
+            <ul class="plugin-grid">
+              <li>
+                <h3>Full-Stack Software Engineering</h3>
+                <p>Designs, builds, tests and reviews software, with Git, a browser for testing pages, and GitHub.</p>
+              </li>
+              <li>
+                <h3>Technical &amp; Academic Publishing</h3>
+                <p>Writes and typesets papers and reports with sound citations, compiles them to PDF, and finds research papers on alphaXiv.</p>
+              </li>
+              <li>
+                <h3>Data Science &amp; Business Intelligence</h3>
+                <p>Explores, cleans and explains data, in a Python environment of its own.</p>
+              </li>
+              <li>
+                <h3>Deep Research &amp; Synthesis</h3>
+                <p>Researches a question across many sources and writes a report with citations, using Tavily web search.</p>
+              </li>
+            </ul>
+            <p class="step__note">
+              Under <span class="ui">Connectors</span>, a plugin lists the
+              services and programs it uses. One that needs a program, such as
+              the Python environment, shows <span class="ui">Set up</span>:
+              select it, then <span class="ui">Install</span>, and Zhiyin
+              downloads what it needs.
+            </p>
+          </section>
+
+          <!-- 5 -->
+          <section class="step" id="search" aria-labelledby="search-title">
+            <header class="step__head">
+              <span class="step__number" aria-hidden="true">5</span>
+              <h2 id="search-title">Add web search, and other services</h2>
+            </header>
+            <p class="step__intro">
+              A connector to an online service needs its own key, made on that
+              service's website. Each one is optional, but web search is the
+              one most tasks benefit from.
+            </p>
+
+            <div class="feature-card">
+              <div class="feature-card__head">
+                <h3>Tavily, for web search</h3>
+                <p class="feature-card__badge">Free · no card needed</p>
+              </div>
+              <p>
+                Tavily is what lets Zhiyin search the web, through the Deep
+                Research &amp; Synthesis plugin. Its free plan gives
+                <strong>1,000 credits every month</strong>, with no credit card
+                required. A basic search uses 1 credit and an advanced search 2.
+              </p>
+              <ol class="step__list">
+                <li>Sign up at <a href="https://tavily.com">tavily.com</a>.</li>
+                <li>Copy your API key from your dashboard at <a href="https://app.tavily.com">app.tavily.com</a>.</li>
+                <li>
+                  In Zhiyin, open <span class="ui">Plugins</span>, select
+                  <span class="ui">Deep Research &amp; Synthesis</span>, and turn
+                  it on if it is off.
+                </li>
+                <li>
+                  Under <span class="ui">Connectors</span>, select
+                  <span class="ui">Settings</span> or
+                  <span class="ui">Set up</span> next to Tavily.
+                </li>
+                <li>
+                  If the window asks <span class="ui">How Zhiyin gets access</span>,
+                  choose <span class="ui">Paste an access token</span>.
+                </li>
+                <li>
+                  Paste the key into the <span class="ui">API key</span> box and
+                  select <span class="ui">Save token</span>. Zhiyin checks it and
+                  shows <span class="ui ui--green">Connected</span>.
+                </li>
+              </ol>
+              <p class="step__note">
+                The same window offers <span class="ui">Sign in with an account</span>
+                too, which opens Tavily's sign-in page in your browser, with
+                nothing to copy.
+              </p>
+            </div>
+
+            <div class="services">
+              <div class="service">
+                <h3>GitHub, for software work</h3>
+                <p>
+                  In Full-Stack Software Engineering, GitHub works with your
+                  repositories, issues and pull requests, using a personal
+                  access token: a key with the permissions you choose. With the
+                  plugin on, select <span class="ui">Set up</span> or
+                  <span class="ui">Settings</span> next to GitHub, then
+                  <span class="ui">Open GitHub</span> to make one; the window
+                  says which permissions to give it. Paste the token and select
+                  <span class="ui">Save token</span>.
+                </p>
+              </div>
+              <div class="service">
+                <h3>alphaXiv, for research papers</h3>
+                <p>
+                  In Technical &amp; Academic Publishing, alphaXiv finds
+                  research papers and reads their full text. With the plugin
+                  on, open alphaXiv's window the same way. Choose
+                  <span class="ui">Sign in with an account</span>, or
+                  <span class="ui">Paste an access token</span> to use an API
+                  key made under Settings &gt; API Keys on
+                  <a href="https://www.alphaxiv.org">alphaxiv.org</a>.
+                </p>
+              </div>
+            </div>
+            <p class="checked">Tavily's free plan checked on 8 October 2026.</p>
+          </section>
+
+          <!-- 6 -->
+          <section class="step" id="work" aria-labelledby="work-title">
+            <header class="step__head">
+              <span class="step__number" aria-hidden="true">6</span>
+              <h2 id="work-title">Give it a task</h2>
+            </header>
+            <p class="step__intro">
+              Type what you need in the message box and press
+              <kbd>Enter</kbd>. <span class="ui">New task</span> in the
+              sidebar, or <kbd>Ctrl</kbd>&thinsp;+&thinsp;<kbd>N</kbd>, starts
+              another conversation.
+            </p>
+
+            <h3 class="step__sub">When it asks</h3>
+            <p>
+              Before Zhiyin changes a file, runs a command or uses a connector,
+              it asks, showing what the action is, what it can do, and the
+              exact command or the files that change. Select a file to see the
+              change line by line. <span class="ui">Zhiyin says</span> marks
+              the AI's own explanation, which can be wrong, so check what will
+              run.
+            </p>
+            <dl class="decisions">
+              <div>
+                <dt><span class="ui ui--red">Allow once</span></dt>
+                <dd>This action runs.</dd>
+              </div>
+              <div>
+                <dt><span class="ui">Deny</span></dt>
+                <dd>
+                  It does not run. You can tell Zhiyin what to do instead, then
+                  select <span class="ui">Confirm denial</span>.
+                </dd>
+              </div>
+              <div>
+                <dt><span class="ui">Allow for this conversation</span></dt>
+                <dd>
+                  Offered for changes to files in one subfolder and for one
+                  connector tool: what it covers runs without asking for the
+                  rest of the conversation. To take it back, select
+                  <span class="ui">•••</span> next to the conversation in the
+                  sidebar, then <span class="ui">Permissions</span>, then
+                  <span class="ui">Revoke</span>.
+                </dd>
+              </div>
+            </dl>
+            <p class="step__note">
+              Deleting a file, running a shell command and running Python
+              always ask.
+            </p>
+
+            <div class="services">
+              <div class="service">
+                <h3>What it cost</h3>
+                <p>
+                  Select <span class="ui">•••</span> next to
+                  <span class="ui">Your preferences</span>, then
+                  <span class="ui">Usage</span>. The page shows what OpenRouter
+                  reported each request cost, by day and by conversation.
+                </p>
+              </div>
+              <div class="service">
+                <h3>How much it keeps in mind</h3>
+                <p>
+                  The small ring in the message box shows how much of the
+                  conversation Zhiyin keeps in mind. Select it to choose
+                  <span class="ui">Low</span>, <span class="ui">Medium</span>
+                  (the default) or <span class="ui">Ultra</span>: a larger budget
+                  keeps more of a long conversation and costs more per request.
+                  <span class="ui">Compact</span> summarises older messages to
+                  save room.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Trouble -->
+          <section class="trouble" id="trouble" aria-labelledby="trouble-title">
+            <h2 id="trouble-title">If something goes wrong</h2>
+            <p class="step__intro">
+              Zhiyin says what happened, with a button for the next step.
+            </p>
+            <dl class="trouble__list">
+              <div>
+                <dt>“Add an OpenRouter API key on the Model page” or “OpenRouter rejected the API key”</dt>
+                <dd>Select <span class="ui">Update API key</span> and paste a key.</dd>
+              </div>
+              <div>
+                <dt>“Choose a model on the Model page”</dt>
+                <dd>Select <span class="ui">Choose a model</span>.</dd>
+              </div>
+              <div>
+                <dt>“The OpenRouter account is out of credits”</dt>
+                <dd>
+                  Select <span class="ui">Add OpenRouter credits</span>, add
+                  credit, then select <span class="ui">Try again</span>.
+                </dd>
+              </div>
+              <div>
+                <dt>A connector's window says the service refused the saved key</dt>
+                <dd>Make a new key on the service's site and paste it there.</dd>
+              </div>
+              <div>
+                <dt>The Plugins page says “Shell commands are unavailable”</dt>
+                <dd>
+                  Select <span class="ui">Get Git for Windows</span>, install
+                  it, then select <span class="ui">Check again</span>.
+                </dd>
+              </div>
+            </dl>
+            <p class="trouble__more">
+              Still stuck?
+              <a href="https://github.com/ZhiyinAgent/Zhiyin/issues/new/choose">Report a problem on GitHub</a>
+              or write to <a href="mailto:contact@zhiyinagent.app">contact@zhiyinagent.app</a>.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- @partial footer -->
+  </body>
+</html>

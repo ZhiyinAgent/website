@@ -1,0 +1,1267 @@
+/* ---- Sections ---------------------------------------------------------- */
+
+main > section:not(.hero, .theatre) {
+  margin-top: var(--section-gap);
+}
+
+/* Between sections, a single string, with half the gap on either side. */
+.break {
+  height: 48px;
+  margin-top: calc(var(--section-gap) / 2 - 24px);
+}
+
+main > .break + section {
+  margin-top: calc(var(--section-gap) / 2 - 24px);
+}
+
+/* Every set of strings on the page: drawn by the script in the page's ink,
+   red where a string is plucked, the hui in mother of pearl. */
+.strings {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--text-soft);
+  --pluck: var(--red);
+  --pearl: var(--text);
+}
+
+.section-head {
+  display: grid;
+  gap: 20px;
+  max-width: 780px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+/* ---- Recorded app footage ---------------------------------------------- */
+
+/* A recording of the app's window, framed as the window it is. The footage
+   is the app in its dark theme, so the frame stays dark in either theme. */
+.screen {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--footage);
+  box-shadow: var(--shadow-window);
+}
+
+.screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--footage);
+}
+
+/* ---- Hero -------------------------------------------------------------- */
+
+/* The promise alone, filling the first window, with the way on below it. */
+.hero {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: calc(100svh - 64px);
+  /* Room at the foot for the strings, and the way on below them. */
+  padding-block: clamp(32px, 6svh, 72px) clamp(200px, 24svh, 240px);
+  /* The glows may spread, but never make the page scroll sideways. */
+  overflow-x: clip;
+  isolation: isolate;
+}
+
+/* The banner's glow: red light behind the words, and low, where the
+   trailer comes from. */
+.hero::before {
+  position: absolute;
+  inset: -64px 0 0;
+  z-index: -1;
+  background:
+    radial-gradient(44% 40% at 50% 40%, var(--red-glow), transparent 72%),
+    radial-gradient(60% 34% at 50% 104%, var(--red-soft), transparent 76%);
+  content: "";
+  pointer-events: none;
+}
+
+.hero__copy {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 6px 12px 6px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--wash-faint);
+  color: var(--text-soft);
+  font-size: 0.8125rem;
+}
+
+/* The app's running marker: the brand red, breathing. */
+.hero__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.hero__title {
+  font-size: var(--size-hero);
+  line-height: 0.98;
+}
+
+/* Words rise into place from behind a clip, a few frames apart, as they do in
+   the trailer. The script wraps each word; without it the title just shows. */
+.word {
+  display: inline-block;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.word > span {
+  display: inline-block;
+  animation: rise 900ms cubic-bezier(0.2, 0.75, 0.15, 1) both;
+  animation-delay: calc(80ms + var(--i, 0) * 70ms);
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(108%);
+  }
+}
+
+.hero__lead {
+  max-width: 54ch;
+  margin-top: 24px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.button__note {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.hero__meta {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.hero__more {
+  position: absolute;
+  bottom: clamp(20px, 4svh, 40px);
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transform: translateX(-50%);
+  transition: color 160ms ease;
+}
+
+.hero__more:hover,
+.hero__more:focus-visible {
+  color: var(--text);
+}
+
+.hero__more svg {
+  width: 18px;
+  height: 18px;
+  animation: nudge 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__more svg {
+    animation: none;
+  }
+}
+
+/* The strings lie behind the words. */
+.hero__strings {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* On a narrow window the words stand at the top, and the mountains rise in
+   the room below them. */
+@media (max-width: 1023.98px) {
+  .hero {
+    align-content: start;
+  }
+}
+
+/* On a wide window the words stand left, and the mountains rise on the
+   right. */
+@media (min-width: 1024px) {
+  .hero__copy {
+    justify-items: start;
+    max-width: 660px;
+    text-align: left;
+  }
+
+  .hero__actions {
+    justify-content: flex-start;
+  }
+
+  .hero__title {
+    font-size: min(var(--size-hero), 12svh);
+  }
+}
+
+/* The trailer, after the words. */
+.theatre {
+  padding-top: 8px;
+}
+
+.film {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: var(--footage);
+  box-shadow:
+    var(--shadow-window),
+    0 48px 140px -56px var(--red-glow);
+}
+
+.film video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.film:not([data-sound]) video {
+  cursor: pointer;
+}
+
+/* The way to the sound: over the film, on the footage, so it keeps the
+   film's dark in either theme. */
+.film__sound {
+  position: absolute;
+  bottom: clamp(12px, 2.2vw, 28px);
+  left: clamp(12px, 2.2vw, 28px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 18px 0 14px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 999px;
+  background: rgb(10 10 11 / 0.6);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  font: 600 0.9375rem / 1 var(--font-body);
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    opacity 200ms ease;
+}
+
+.film__sound svg {
+  width: 18px;
+  height: 18px;
+}
+
+.film:hover .film__sound,
+.film__sound:focus-visible {
+  border-color: transparent;
+  background: var(--red-fill);
+}
+
+.film[data-sound] .film__sound {
+  visibility: hidden;
+  opacity: 0;
+}
+
+@media (max-width: 560px) {
+  .film {
+    border-radius: 12px;
+  }
+
+  .film__sound {
+    gap: 7px;
+    min-height: 32px;
+    padding: 0 12px 0 9px;
+    font-size: 0.75rem;
+  }
+
+  .film__sound svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* ---- The trailer, arriving --------------------------------------------- */
+
+/* On a window large enough, with motion allowed, the script marks the
+   trailer's section pinned. The section then holds still for a stretch of
+   scrolling: the trailer rises in at three-quarter size below the words,
+   grows to fill the window and, in the dark theme, the lights dim around it;
+   it plays there a while, the lights come back, and the page goes on.
+
+   Two numbers drive it: --in, from 0 to 1 as the section scrolls up into the
+   window, and --out, from 0 to 1 over the end of its stretch. Where the
+   browser can tie an animation to scrolling, the section's own scroll drives
+   them; elsewhere the script sets them. */
+@property --in {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --out {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@keyframes theatre-in {
+  to {
+    --in: 1;
+  }
+}
+
+@keyframes theatre-out {
+  to {
+    --out: 1;
+  }
+}
+
+.theatre[data-pinned] {
+  /* Arriving, eased. */
+  --q: calc(var(--in) * var(--in) * (3 - 2 * var(--in)));
+  height: 180svh;
+}
+
+@supports (animation-timeline: view()) {
+  .theatre[data-pinned] {
+    animation:
+      theatre-in linear both,
+      theatre-out linear both;
+    /* The section's own stretch, not narrowed by the page's scroll padding. */
+    animation-timeline: view(block 0px), view(block 0px);
+    animation-range:
+      entry 0% entry 100%,
+      contain 70% contain 100%;
+  }
+}
+
+.theatre[data-pinned] .theatre__pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  isolation: isolate;
+}
+
+/* The dimmed lights cover the window, the words above included, under the
+   trailer and the header. */
+.theatre[data-pinned] .theatre__pin::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--footage);
+  content: "";
+  opacity: calc(var(--q) * (1 - var(--out)) * var(--dim));
+  pointer-events: none;
+}
+
+/* The trailer fills the window below the header. */
+.theatre[data-pinned] .stage {
+  position: absolute;
+  inset: 64px 0 0;
+  display: grid;
+  place-items: center;
+  width: auto;
+  margin: 0;
+  padding: 24px var(--gutter);
+}
+
+.theatre[data-pinned] .film {
+  width: min(100%, calc((100svh - 112px) * 16 / 9));
+  transform: scale(calc(0.74 + 0.26 * var(--q)));
+  will-change: transform;
+}
+
+/* The way to the sound shows once the trailer is large enough to watch. */
+.theatre[data-pinned] .film__sound {
+  opacity: clamp(0, (var(--q) - 0.6) / 0.4, 1);
+}
+
+/* ---- The story --------------------------------------------------------- */
+
+.story {
+  --stage: calc(100svh - 64px);
+}
+
+.story__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(40px, 5vw, 80px);
+}
+
+.story__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+/* Each step is a tall stretch of page with its words in the middle, level
+   with the screen beside it, which holds while the step is read. The first
+   and last are as tall as the screen's stretch, so the words and the screen
+   arrive and leave together. The step being read is lit; the others wait. */
+.story__step {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  min-height: calc(var(--stage) * 0.66);
+  counter-increment: step;
+  transition: opacity 400ms ease;
+}
+
+.story__step:first-child,
+.story__step:last-child {
+  min-height: var(--stage);
+}
+
+.js .story__step:not([data-active]) {
+  opacity: 0.28;
+}
+
+.story__step h3 {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.25rem);
+  font-stretch: 87.5%;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.story__step h3::before {
+  flex: 0 0 auto;
+  color: var(--red);
+  content: counter(step) ".";
+}
+
+.story__step p {
+  max-width: 44ch;
+  padding-left: 1.6em;
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.story__screen {
+  position: sticky;
+  top: 64px;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  height: var(--stage);
+}
+
+/* The recordings lie on one another; the step's own crosses in over the one
+   before, which ends framed where it begins. */
+.story__screen video {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 450ms ease,
+    visibility 0s linear 450ms;
+}
+
+.story__screen video[data-active] {
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity 450ms ease,
+    visibility 0s;
+}
+
+/* Without the script, the first recording shows. */
+:root:not(.js) .story__screen video:first-child {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Above the screen's shadow, which would otherwise dim it. */
+.story__bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* A bar for each step: those read are full, the one being read fills as its
+   recording plays. */
+.story__progress {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.story__progress li {
+  position: relative;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--line-strong);
+}
+
+.story__progress li::after {
+  position: absolute;
+  inset: 0;
+  background: var(--red);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.story__progress li[data-active]::after {
+  transform: scaleX(var(--played, 0));
+}
+
+.story__progress li[data-passed]::after {
+  transform: none;
+}
+
+.story__sped {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.story__screen:not([data-sped]) .story__sped {
+  visibility: hidden;
+}
+
+.story__replay svg,
+.story__next svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* While a recording plays, the way on waits, quiet. Once it has ended, Replay
+   shows and the way on lights up, its arrow nudging down; the next step
+   brightens a little, to say where the story goes on. */
+.story__screen:not([data-ended]) .story__replay {
+  visibility: hidden;
+}
+
+.story__screen[data-ended] .story__next {
+  border-color: var(--red-fill);
+  background: var(--red-fill);
+  color: var(--on-red);
+}
+
+.story__screen[data-ended] .story__next svg {
+  animation: nudge 1.4s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.js .story__step[data-active][data-ended] + .story__step {
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story__screen[data-ended] .story__next svg {
+    animation: none;
+  }
+}
+
+.story__inline {
+  display: none;
+}
+
+/* On a narrow window the screen cannot sit beside the words: the script
+   gives each step its own recording, under its words. */
+@media (max-width: 960px) {
+  .story__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .js .story__screen {
+    display: none;
+  }
+
+  .story__screen {
+    position: static;
+    height: auto;
+  }
+
+  .story__step,
+  .story__step:first-child,
+  .story__step:last-child {
+    min-height: 0;
+    padding-bottom: 56px;
+  }
+
+  .js .story__step:not([data-active]) {
+    opacity: 1;
+  }
+
+  .story__inline {
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+/* ---- Recording controls ------------------------------------------------ */
+
+/* Over the footage, in the footage's dark: whether the recording is sped up,
+   and a way to watch it again once it has ended. */
+.screen__controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.screen__sped,
+.screen__replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 999px;
+  background: rgb(10 10 11 / 0.66);
+  backdrop-filter: blur(10px);
+  color: rgb(255 255 255 / 0.82);
+  font: 500 0.75rem / 1 var(--font-body);
+}
+
+.screen__replay {
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 250ms ease,
+    background-color 200ms ease,
+    visibility 0s linear 250ms;
+}
+
+.screen__replay svg {
+  width: 14px;
+  height: 14px;
+}
+
+.screen[data-ended] .screen__replay {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 250ms ease,
+    background-color 200ms ease,
+    visibility 0s;
+}
+
+.screen__replay:hover,
+.screen__replay:focus-visible {
+  background: var(--red-fill);
+}
+
+/* A run opens larger: the way to it sits where a player keeps its full
+   screen, and the recording itself opens it too. */
+.screen__open {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 12px 0 10px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 999px;
+  background: rgb(10 10 11 / 0.66);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font: 600 0.8125rem / 1 var(--font-body);
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.screen__open svg {
+  width: 14px;
+  height: 14px;
+}
+
+.screen[data-run]:hover .screen__open,
+.screen__open:focus-visible {
+  border-color: transparent;
+  background: var(--red-fill);
+}
+
+.screen[data-run] video {
+  cursor: zoom-in;
+}
+
+/* ---- Other runs -------------------------------------------------------- */
+
+.runs {
+  scroll-margin-top: 88px;
+}
+
+.runs__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.run {
+  display: grid;
+  grid-column: span 5;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel-raised);
+}
+
+.run--wide {
+  grid-column: span 7;
+}
+
+.run .screen {
+  margin: 14px 14px 0;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+/* The cost stands at the card's foot, level with its neighbour's. */
+.run__body {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 14px;
+  padding: 22px 24px 26px;
+}
+
+/* The request as it was typed, in the app's message bubble. */
+.run__ask {
+  justify-self: start;
+  padding: 10px 14px;
+  border-radius: 16px 16px 4px 16px;
+  background: var(--wash-strong);
+  color: var(--text);
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+
+.run__did {
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.run__cost {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: end;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-top: 4px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.run__cost strong {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-stretch: 87.5%;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.runs__note {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 900px) {
+  .run,
+  .run--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---- A run, large ------------------------------------------------------ */
+
+/* As large as the window allows with its bar above it, never wider than the
+   recording's own pixels. */
+.viewer {
+  width: min(96vw, 1680px, calc((96svh - 84px) * 16 / 9));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background: var(--panel-raised);
+  color: var(--text);
+  box-shadow: var(--shadow-window);
+}
+
+.viewer[open] {
+  animation: viewer-in 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.viewer::backdrop {
+  background: var(--scrim);
+  backdrop-filter: blur(6px);
+}
+
+@keyframes viewer-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+
+html:has(.viewer[open]) {
+  overflow: hidden;
+}
+
+.viewer__bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 12px 12px 20px;
+}
+
+.viewer__text {
+  display: grid;
+  flex: 1;
+  gap: 3px;
+  min-width: 0;
+}
+
+.viewer__ask {
+  display: -webkit-box;
+  overflow: hidden;
+  font-weight: 600;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.viewer__note {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.viewer__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--wash-faint);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.viewer__close:hover,
+.viewer__close:focus-visible {
+  background: var(--wash-strong);
+}
+
+.viewer__close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.viewer__video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--footage);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewer[open] {
+    animation: none;
+  }
+}
+
+/* ---- Plugins ----------------------------------------------------------- */
+
+.plugin-list {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel-raised);
+  list-style: none;
+}
+
+.plugin {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 20px 24px;
+}
+
+.plugin + .plugin {
+  border-top: 1px solid var(--line);
+}
+
+.plugin__text {
+  display: grid;
+  flex: 1;
+  gap: 6px;
+  min-width: 0;
+}
+
+.plugin h3 {
+  font-size: 1.0625rem;
+}
+
+.plugin__text > p {
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.plugin__uses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.plugin__uses span {
+  padding: 2px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--wash);
+  color: var(--muted);
+  font-size: 0.78125rem;
+}
+
+/* The app's switch: red when on. */
+.switch {
+  position: relative;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--wash);
+}
+
+.switch i {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: transform 200ms ease;
+}
+
+.switch[data-on] {
+  border-color: var(--red-fill);
+  background: var(--red-fill);
+}
+
+.switch[data-on] i {
+  background: var(--on-red);
+  transform: translateX(16px);
+}
+
+.plugins__more {
+  margin-top: 20px;
+  color: var(--muted);
+}
+
+/* ---- Cost -------------------------------------------------------------- */
+
+.ledger {
+  margin: 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.ledger__row {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 160px;
+  gap: 8px 32px;
+  align-items: baseline;
+  padding-block: 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ledger dt {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.ledger dd {
+  margin: 0;
+  max-width: 54ch;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.ledger .ledger__figure {
+  justify-self: end;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-stretch: 87.5%;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .ledger__row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .ledger dd:not(.ledger__figure) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .ledger .ledger__figure {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 1.25rem;
+  }
+}
+
+/* ---- The name ---------------------------------------------------------- */
+
+.name {
+  padding-block: clamp(72px, 9vw, 120px);
+  border-block: 1px solid var(--line);
+  background: var(--ground-deep);
+}
+
+.name__grid {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: center;
+}
+
+/* A seal, as a name is stamped on a scroll: the two characters, read top to
+   bottom, white on the brand red. */
+.name__glyphs {
+  display: grid;
+  place-items: center;
+  width: clamp(132px, 16vw, 188px);
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  background: var(--red-fill);
+  box-shadow:
+    inset 0 0 0 6px var(--red-fill),
+    inset 0 0 0 8px var(--seal-ring);
+  color: var(--on-red);
+  font-family: var(--font-cjk);
+  font-size: clamp(3rem, 6.4vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  writing-mode: vertical-rl;
+  transform: rotate(-2deg);
+}
+
+/* As wide as every other section's text, so its lines end where theirs do. */
+.name__text {
+  display: grid;
+  gap: 14px;
+  max-width: 780px;
+}
+
+.name__text h2 {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-stretch: normal;
+  font-weight: 500;
+}
+
+.name__gloss {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  font-stretch: 87.5%;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.name__gloss .mono {
+  color: var(--red);
+  font-family: var(--font-display);
+}
+
+.name__text > p:last-child {
+  color: var(--text-soft);
+  font-size: var(--size-lead);
+  line-height: 1.6;
+}
+
+/* The qin itself, under the story of its name. */
+.name__qin {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.name__qin .strings {
+  height: auto;
+  min-height: 80px;
+  aspect-ratio: 5.2 / 1;
+}
+
+@media (max-width: 640px) {
+  .name__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- Open source ------------------------------------------------------- */
+
+.open__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.open__grid .lead {
+  margin-block: 20px 28px;
+}
+
+.terminal {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 20px 22px 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+}
+
+.terminal pre {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.terminal__prompt {
+  margin-right: 6px;
+  color: var(--red);
+}
+
+@media (max-width: 860px) {
+  .open__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- Closing ----------------------------------------------------------- */
+
+.closing__inner {
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+/* The page ends on the seven strings, lying still, just above the footer. */
+.closing__strings {
+  height: clamp(110px, 11vw, 150px);
+  margin-top: clamp(32px, 5vw, 64px);
+}
+
+main:has(.closing__strings) + .site-footer {
+  margin-top: 0;
+}
+
+.closing__mark {
+  width: 72px;
+  height: 72px;
+  color: var(--text);
+  filter: drop-shadow(0 0 28px var(--red-glow));
+}
+
+.closing h2 {
+  font-size: var(--size-h2);
+}
+
+.closing__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.closing__note {
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}

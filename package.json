@@ -1,0 +1,24 @@
+{
+  "name": "zhiyin-website",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "test": "node --test \"build/**/*.test.js\"",
+    "media:upload": "node scripts/upload-media.mjs",
+    "preview": "vite preview",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@fontsource/barlow-semi-condensed": "5.3.0",
+    "@types/node": "22.20.5",
+    "typescript": "7.0.2",
+    "vite": "8.3.3",
+    "wrangler": "4.148.0"
+  }
+}
