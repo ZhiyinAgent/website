@@ -7,7 +7,7 @@
     <title>Setup guide · Zhiyin</title>
     <meta
       name="description"
-      content="Set Zhiyin up in a few minutes: install it, connect an AI model through OpenRouter, choose a folder, turn on plugins and add free web search."
+      content="Set Zhiyin up in a few minutes: install it, connect an AI model, choose a folder, turn on plugins and add free web search."
     />
     <link rel="canonical" href="https://zhiyinagent.app/guide/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -20,7 +20,7 @@
     <meta property="og:title" content="Set up Zhiyin in a few minutes" />
     <meta
       property="og:description"
-      content="Install, connect an AI model through OpenRouter, choose a folder, turn on plugins and add free web search."
+      content="Install, connect an AI model, choose a folder, turn on plugins and add free web search."
     />
     <meta property="og:url" content="https://zhiyinagent.app/guide/" />
     <meta property="og:image" content="https://zhiyinagent.app/og.png" />
@@ -46,7 +46,7 @@
           </li>
           <li>
             <svg aria-hidden="true"><use href="#i-check" /></svg>
-            An OpenRouter account with $5 of credit
+            An AI provider account with $5 of credit
           </li>
           <li>
             <svg aria-hidden="true"><use href="#i-check" /></svg>
@@ -138,19 +138,20 @@
           <section class="step" id="model" aria-labelledby="model-title">
             <header class="step__head">
               <span class="step__number" aria-hidden="true">2</span>
-              <h2 id="model-title">Connect an AI model through OpenRouter</h2>
+              <h2 id="model-title">Connect an AI model</h2>
             </header>
             <p class="step__intro">
               The thinking behind Zhiyin is done by an AI model, which runs on
-              a company's servers.
+              a company's servers. Zhiyin reaches it with an account of yours.
               <a href="https://openrouter.ai">OpenRouter</a> gives you access
-              to many AI models from different companies with one account. You
-              buy credit in advance, and each request Zhiyin sends uses a
-              little of it, depending on the model.
+              to many AI models from different companies with one account, and
+              is the simplest place to start: the steps below use it. You buy
+              credit in advance, and each request Zhiyin sends uses a little
+              of it, depending on the model.
             </p>
             <p class="step__define">
               <strong>An API key</strong> is like a password that lets Zhiyin
-              use your OpenRouter account.
+              use your account with a provider.
             </p>
             <ol class="step__list">
               <li>Create an account at <a href="https://openrouter.ai">openrouter.ai</a>.</li>
@@ -167,7 +168,9 @@
                 <kbd>Ctrl</kbd>&thinsp;+&thinsp;<kbd>,</kbd>.
               </li>
               <li>
-                Select <span class="ui">Add a key</span>.
+                Under <span class="ui">Provider</span>, choose
+                <span class="ui">OpenRouter</span>, then select
+                <span class="ui">Add a key</span>.
                 <span class="ui">Get a key on OpenRouter</span> opens the page
                 where keys are made. Create one there and copy it: it starts
                 with <code>sk-or-v1-</code>.
@@ -185,6 +188,14 @@
                 recommends.
               </li>
             </ol>
+            <p class="step__note">
+              Under <span class="ui">Provider</span> you can choose the company
+              that makes a model instead: Anthropic, OpenAI, Mistral, DeepSeek,
+              Kimi, MiniMax, Qwen, Xiaomi MiMo or Z.ai. The steps are the same,
+              with an account and a key from that company. DeepSeek, Kimi,
+              MiniMax, Qwen, Xiaomi MiMo and Z.ai each run an International and
+              a Mainland China platform, and each platform has its own key.
+            </p>
 
             <div class="facts">
               <div class="fact">
@@ -215,7 +226,7 @@
                 </p>
               </div>
             </div>
-            <p class="checked">Prices and limits checked on 8 October 2026.</p>
+            <p class="checked">OpenRouter's prices and limits checked on 8 October 2026.</p>
           </section>
 
           <!-- 3 -->
@@ -271,6 +282,10 @@
               <li>
                 <h3>Deep Research &amp; Synthesis</h3>
                 <p>Researches a question across many sources and writes a report with citations, using Tavily web search.</p>
+              </li>
+              <li>
+                <h3>3D &amp; Rendering</h3>
+                <p>Builds 3D scenes and renders them, in a Blender that Zhiyin installs and runs on your PC.</p>
               </li>
             </ul>
             <p class="step__note">
@@ -422,8 +437,9 @@
                 <p>
                   Select <span class="ui">•••</span> next to
                   <span class="ui">Your preferences</span>, then
-                  <span class="ui">Usage</span>. The page shows what OpenRouter
-                  reported each request cost, by day and by conversation.
+                  <span class="ui">Usage</span>. The page shows what each
+                  request cost, by day and by conversation: the provider's own
+                  figure, or an estimate from its price list.
                 </p>
               </div>
               <div class="service">
@@ -445,7 +461,9 @@
           <section class="trouble" id="trouble" aria-labelledby="trouble-title">
             <h2 id="trouble-title">If something goes wrong</h2>
             <p class="step__intro">
-              Zhiyin says what happened, with a button for the next step.
+              Zhiyin says what happened, with a button for the next step. The
+              messages below name OpenRouter; with another provider, they name
+              that one.
             </p>
             <dl class="trouble__list">
               <div>

@@ -370,6 +370,24 @@ function viewer() {
   dialog.addEventListener("close", () => video.pause());
 }
 
+/**
+ * The plugins: choosing one turns its switch on and shows what it brings,
+ * beside the names on a wide window and under its own name on a narrow one.
+ */
+function shelf(root: HTMLElement) {
+  const tabs = [...root.querySelectorAll<HTMLButtonElement>("[data-plugin]")];
+  const choose = (chosen: HTMLButtonElement) => {
+    for (const tab of tabs) {
+      tab.setAttribute("aria-expanded", String(tab === chosen));
+      const panel = document.getElementById(tab.getAttribute("aria-controls") ?? "");
+      panel?.toggleAttribute("hidden", tab !== chosen);
+    }
+  };
+  for (const tab of tabs) tab.addEventListener("click", () => choose(tab));
+  const first = tabs.find((tab) => tab.getAttribute("aria-expanded") === "true") ?? tabs[0];
+  if (first) choose(first);
+}
+
 if (!reducedMotion) {
   for (const title of document.querySelectorAll<HTMLElement>("[data-words]")) {
     splitWords(title);
@@ -385,6 +403,8 @@ strung(document.querySelector(".hero"), "[data-landscape]", heroLandscape);
 for (const line of document.querySelectorAll<HTMLElement>(".break")) strung(line, "[data-break]", breakString);
 strung(document.querySelector(".name"), "[data-qin]", qinInstrument);
 strung(document.querySelector(".closing"), "[data-water]", closingWater);
+const plugins = document.querySelector<HTMLElement>("[data-shelf]");
+if (plugins) shelf(plugins);
 const stage = document.querySelector<HTMLElement>("[data-theatre]");
 if (stage) theatre(stage);
 const filmFigure = document.querySelector<HTMLElement>("[data-film]");

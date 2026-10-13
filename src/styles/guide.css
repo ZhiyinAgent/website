@@ -457,6 +457,11 @@ kbd {
   background: var(--panel-raised);
 }
 
+/* An odd one out takes the whole row instead of leaving a gap beside it. */
+.plugin-grid li:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .plugin-grid h3 {
   font-size: 1rem;
 }

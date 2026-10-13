@@ -195,9 +195,8 @@
         <header class="section-head" data-reveal>
           <h2 id="runs-title">One app, <em>all kinds of work.</em></h2>
           <p class="lead">
-            Four more requests, each run once with a low-cost model and
-            recorded from start to finish. Here is what Zhiyin did, and what
-            each whole run cost.
+            Five more requests, each run once and recorded from start to
+            finish. Here is what Zhiyin did, and what each whole run cost.
           </p>
         </header>
 
@@ -261,7 +260,7 @@
           </article>
 
           <article class="run run--wide" data-reveal>
-            <figure class="screen" data-run data-long="/media/clips/study-long.mp4" data-long-note="2× faster while it works">
+            <figure class="screen" data-run data-long="/media/clips/study-long.mp4" data-long-note="Up to 4× faster while it works">
               <video data-sped muted playsinline preload="none" poster="/media/clips/study.webp" data-end-poster="/media/clips/study-end.webp" width="1600" height="900" aria-label="A ten-question quiz on the water cycle, answered and scored"><source src="/media/clips/study.mp4" type="video/mp4" /></video>
               <button class="screen__open" type="button" data-open-long>
                 <svg aria-hidden="true"><use href="#i-expand" /></svg>
@@ -274,13 +273,63 @@
                 Read the chapter, wrote a ten-question quiz, then scored the
                 answers and explained each one.
               </p>
-              <p class="run__cost"><strong>$0.0066</strong> for the whole run</p>
+              <p class="run__cost"><strong>$0.0050</strong> for the whole run</p>
+            </div>
+          </article>
+
+          <article class="run run--full" data-reveal>
+            <figure class="screen" data-run data-long="/media/clips/desk-long.mp4" data-long-note="Up to 30× faster while it works">
+              <video data-sped muted playsinline preload="none" poster="/media/clips/desk.webp" data-end-poster="/media/clips/desk-end.webp" width="1600" height="900" aria-label="Zhiyin rebuilding a photo of a desk as a 3D scene and rendering it from where the photo was taken"><source src="/media/clips/desk.mp4" type="video/mp4" /></video>
+              <button class="screen__open" type="button" data-open-long>
+                <svg aria-hidden="true"><use href="#i-expand" /></svg>
+                Watch larger
+              </button>
+            </figure>
+            <div class="run__pair">
+              <figure>
+                <img src="/media/runs/desk-photo.webp" width="960" height="640" loading="lazy" alt="The photo: a laptop, a cactus, a glass frame and a tray of prints on a pine table" />
+                <figcaption>The photo</figcaption>
+              </figure>
+              <figure>
+                <img src="/media/runs/desk-render.webp" width="960" height="640" loading="lazy" alt="The render: the same objects rebuilt in 3D, seen from the same place" />
+                <figcaption>What Zhiyin rendered</figcaption>
+              </figure>
+            </div>
+            <div class="run__body">
+              <p class="run__ask">
+                This is a photo of a desk. Rebuild it in 3D exactly as it is:
+                only the objects the photo shows, each at a realistic size and
+                in the same place, with the same colours and materials and the
+                same soft daylight. Printed pictures in the scene can be
+                plain stand-ins. Then take one picture from where the photo
+                was taken: same height, distance, direction and lens, camera
+                level, so that each object sits at the same spot in the frame
+                as in the photo. Save it as renders/desk_rebuild.png at 1920 x
+                1280. Before finishing, compare it with the photo and correct
+                what differs most.
+              </p>
+              <p class="run__did">
+                Looked at the photo attached to the request, built the table
+                and what stands on it in Blender, lit the scene, compared three
+                drafts with the photo, then rendered it from where the photo
+                was taken.
+              </p>
+              <dl class="run__facts">
+                <div><dt>Model</dt><dd>Claude Sonnet 5.5, at high effort</dd></div>
+                <div><dt>Plugin</dt><dd>3D &amp; Rendering</dd></div>
+                <div><dt>Time</dt><dd>7 min 20 s</dd></div>
+              </dl>
+              <p class="run__cost"><strong>$0.86</strong> for the whole run</p>
             </div>
           </article>
         </div>
         <p class="runs__note" data-reveal>
-          Each run used <span class="mono">deepseek/deepseek-v4.1-flash</span>
-          through OpenRouter. The costs are what OpenRouter reported for it.
+          The first four used <span class="mono">deepseek/deepseek-v4.1-flash</span>
+          through OpenRouter, and their costs are what OpenRouter reported. The
+          3D scene used <span class="mono">claude-sonnet-5-5</span> through
+          Anthropic's API, and its cost is counted from the tokens it used at
+          Anthropic's prices. The photo is by Pineapple Supply Co., released
+          under CC0.
         </p>
       </section>
 
@@ -313,51 +362,203 @@
       <!-- A string between sections, plucked as it comes into view. -->
       <div class="wrap break" aria-hidden="true"><canvas class="strings" data-break></canvas></div>
 
-      <!-- Plugins: the four that come with the app, with what they connect to. -->
+      <!-- Plugins: the five that come with the app, with what they connect to. -->
       <section class="plugins wrap" aria-labelledby="plugins-title">
         <div class="section-head" data-reveal>
           <h2 id="plugins-title">Turn on the <span class="nowrap">know-how</span> <em>you need.</em></h2>
           <p class="lead">
-            A plugin brings the skills and tools for one kind of work. Four
-            come with Zhiyin. Each one you turn on is used only when a task
-            calls for it.
+            A plugin brings the skills, specialists and tools for one kind of
+            work. Five come with Zhiyin, each used only when a task calls
+            for it.
           </p>
         </div>
 
-        <ul class="plugin-list" data-reveal>
-          <li class="plugin">
-            <div class="plugin__text">
-              <h3>Deep Research &amp; Synthesis</h3>
-              <p>Researches a question across many sources and writes a report with citations.</p>
-              <p class="plugin__uses"><span>Tavily web search</span></p>
-            </div>
-            <span class="switch" data-on aria-hidden="true"><i></i></span>
-          </li>
-          <li class="plugin">
-            <div class="plugin__text">
-              <h3>Data Science &amp; Business Intelligence</h3>
-              <p>Explores, cleans and explains data, in a Python environment of its own.</p>
-              <p class="plugin__uses"><span>Python</span></p>
-            </div>
-            <span class="switch" data-on aria-hidden="true"><i></i></span>
-          </li>
-          <li class="plugin">
-            <div class="plugin__text">
-              <h3>Technical &amp; Academic Publishing</h3>
-              <p>Writes and typesets papers and reports with sound citations, and compiles them to PDF.</p>
-              <p class="plugin__uses"><span>alphaXiv</span></p>
-            </div>
+        <div class="shelf" data-shelf data-reveal>
+          <button class="shelf__tab" type="button" id="plugin-research" aria-expanded="true" aria-controls="plugin-research-brings" data-plugin>
+            <span class="shelf__name">
+              <strong>Deep Research &amp; Synthesis</strong>
+              <small>Research</small>
+            </span>
             <span class="switch" aria-hidden="true"><i></i></span>
-          </li>
-          <li class="plugin">
-            <div class="plugin__text">
-              <h3>Full-Stack Software Engineering</h3>
-              <p>Designs, builds, tests and reviews software, with a browser for testing pages.</p>
-              <p class="plugin__uses"><span>Git</span><span>GitHub</span></p>
+          </button>
+          <div class="shelf__panel" id="plugin-research-brings" role="region" aria-labelledby="plugin-research">
+            <div class="brings">
+              <p class="brings__does">Researches a question across many sources, checks the facts and writes a balanced report with citations.</p>
+              <div class="brings__groups">
+                <div class="brings__group">
+                  <h3>Skills <span>4</span></h3>
+                  <ul>
+                    <li>Source triangulation</li>
+                    <li>Competitive analysis</li>
+                    <li>Neutrality review</li>
+                    <li>Knowledge-graph mapping</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Specialists <span>2</span></h3>
+                  <ul>
+                    <li>Fact-checker</li>
+                    <li>Report synthesizer</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Connects to <span>1</span></h3>
+                  <ul>
+                    <li>Tavily web search</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="brings__ask"><span>Try asking</span><p>Research this question and cite the strongest sources.</p></div>
             </div>
+          </div>
+          <button class="shelf__tab" type="button" id="plugin-data-science" aria-expanded="false" aria-controls="plugin-data-science-brings" data-plugin>
+            <span class="shelf__name">
+              <strong>Data Science &amp; Business Intelligence</strong>
+              <small>Analysis</small>
+            </span>
             <span class="switch" aria-hidden="true"><i></i></span>
-          </li>
-        </ul>
+          </button>
+          <div class="shelf__panel" id="plugin-data-science-brings" role="region" aria-labelledby="plugin-data-science">
+            <div class="brings">
+              <p class="brings__does">Explores, cleans, tests and explains data, in a Python environment of its own.</p>
+              <div class="brings__groups">
+                <div class="brings__group">
+                  <h3>Skills <span>4</span></h3>
+                  <ul>
+                    <li>Exploratory data analysis</li>
+                    <li>Statistical testing</li>
+                    <li>SQL optimization</li>
+                    <li>Dashboard design</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Specialists <span>2</span></h3>
+                  <ul>
+                    <li>Data cleansing specialist</li>
+                    <li>Insights synthesizer</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Connects to <span>1</span></h3>
+                  <ul>
+                    <li>Python environment</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="brings__ask"><span>Try asking</span><p>Did this A/B test actually change anything?</p></div>
+            </div>
+          </div>
+          <button class="shelf__tab" type="button" id="plugin-publishing" aria-expanded="false" aria-controls="plugin-publishing-brings" data-plugin>
+            <span class="shelf__name">
+              <strong>Technical &amp; Academic Publishing</strong>
+              <small>Writing</small>
+            </span>
+            <span class="switch" aria-hidden="true"><i></i></span>
+          </button>
+          <div class="shelf__panel" id="plugin-publishing-brings" role="region" aria-labelledby="plugin-publishing">
+            <div class="brings">
+              <p class="brings__does">Writes and typesets papers and reports with sound citations, and compiles them to PDF.</p>
+              <div class="brings__groups">
+                <div class="brings__group">
+                  <h3>Skills <span>4</span></h3>
+                  <ul>
+                    <li>LaTeX and Typst authoring</li>
+                    <li>Whitepaper structure</li>
+                    <li>Diagram engineering</li>
+                    <li>Bibliography hygiene</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Specialists <span>2</span></h3>
+                  <ul>
+                    <li>Peer-review critic</li>
+                    <li>Citation auditor</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Connects to <span>2</span></h3>
+                  <ul>
+                    <li>Document compiler</li>
+                    <li>alphaXiv</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="brings__ask"><span>Try asking</span><p>Turn these notes into a Typst paper and compile it.</p></div>
+            </div>
+          </div>
+          <button class="shelf__tab" type="button" id="plugin-engineering" aria-expanded="false" aria-controls="plugin-engineering-brings" data-plugin>
+            <span class="shelf__name">
+              <strong>Full-Stack Software Engineering</strong>
+              <small>Development</small>
+            </span>
+            <span class="switch" aria-hidden="true"><i></i></span>
+          </button>
+          <div class="shelf__panel" id="plugin-engineering-brings" role="region" aria-labelledby="plugin-engineering">
+            <div class="brings">
+              <p class="brings__does">Designs, builds, tests and reviews software, with a browser for testing pages.</p>
+              <div class="brings__groups">
+                <div class="brings__group">
+                  <h3>Skills <span>5</span></h3>
+                  <ul>
+                    <li>Frontend design systems</li>
+                    <li>Backend API patterns</li>
+                    <li>System architecture</li>
+                    <li>Database architecture and design</li>
+                    <li>Test-driven development</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Specialists <span>4</span></h3>
+                  <ul>
+                    <li>Code reviewer</li>
+                    <li>Interactive debugger</li>
+                    <li>Refactoring architect</li>
+                    <li>QA and end-to-end verifier</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Connects to <span>3</span></h3>
+                  <ul>
+                    <li>Git</li>
+                    <li>Browser</li>
+                    <li>GitHub</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="brings__ask"><span>Try asking</span><p>Find out why this test fails and fix it.</p></div>
+            </div>
+          </div>
+          <button class="shelf__tab" type="button" id="plugin-3d-rendering" aria-expanded="false" aria-controls="plugin-3d-rendering-brings" data-plugin>
+            <span class="shelf__name">
+              <strong>3D &amp; Rendering</strong>
+              <small>Design</small>
+            </span>
+            <span class="switch" aria-hidden="true"><i></i></span>
+          </button>
+          <div class="shelf__panel" id="plugin-3d-rendering-brings" role="region" aria-labelledby="plugin-3d-rendering">
+            <div class="brings">
+              <p class="brings__does">Builds 3D scenes and renders them: product pictures, rooms from a floor plan, parts to print.</p>
+              <div class="brings__groups">
+                <div class="brings__group">
+                  <h3>Skills <span>4</span></h3>
+                  <ul>
+                    <li>Scene building</li>
+                    <li>Product renders</li>
+                    <li>Interiors from plans</li>
+                    <li>Printable parts</li>
+                  </ul>
+                </div>
+                <div class="brings__group">
+                  <h3>Connects to <span>1</span></h3>
+                  <ul>
+                    <li>3D studio, in Blender</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="brings__ask"><span>Try asking</span><p>Build this apartment from the floor plan and show me the living room.</p></div>
+            </div>
+          </div>
+        </div>
         <p class="plugins__more" data-reveal>
           You can also make your own, with skills, specialists and connectors
           to online services.
@@ -386,8 +587,9 @@
           <div class="ledger__row">
             <dt>The AI model</dt>
             <dd>
-              Pay as you go through OpenRouter, one account for models from many
-              companies. $5 of credit is enough to start.
+              Pay as you go: through OpenRouter, one account for models from
+              many companies, or straight to the company that makes the model.
+              $5 of credit is enough to start.
             </dd>
             <dd class="ledger__figure">from $5</dd>
           </div>
