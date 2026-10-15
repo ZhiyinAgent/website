@@ -278,8 +278,8 @@
           </article>
 
           <article class="run run--full" data-reveal>
-            <figure class="screen" data-run data-long="/media/clips/desk-long.mp4" data-long-note="Up to 30× faster while it works">
-              <video data-sped muted playsinline preload="none" poster="/media/clips/desk.webp" data-end-poster="/media/clips/desk-end.webp" width="1600" height="900" aria-label="Zhiyin rebuilding a photo of a desk as a 3D scene and rendering it from where the photo was taken"><source src="/media/clips/desk.mp4" type="video/mp4" /></video>
+            <figure class="screen" data-run data-long="/media/clips/stand-long.mp4" data-long-note="Up to 90× faster while it works">
+              <video data-sped muted playsinline preload="none" poster="/media/clips/stand.webp" data-end-poster="/media/clips/stand-end.webp" width="1600" height="900" aria-label="Zhiyin asking about the chargers and the printer, then designing a 3D-printable stand for a phone and a watch and rendering it"><source src="/media/clips/stand.mp4" type="video/mp4" /></video>
               <button class="screen__open" type="button" data-open-long>
                 <svg aria-hidden="true"><use href="#i-expand" /></svg>
                 Watch larger
@@ -287,49 +287,46 @@
             </figure>
             <div class="run__pair">
               <figure>
-                <img src="/media/runs/desk-photo.webp" width="960" height="640" loading="lazy" alt="The photo: a laptop, a cactus, a glass frame and a tray of prints on a pine table" />
-                <figcaption>The photo</figcaption>
+                <img src="/media/runs/stand-alone.webp" width="960" height="960" loading="lazy" alt="The stand on its own: a charcoal base with a reclined back panel holding a round charger pocket, and a round pillar for the watch charger" />
+                <figcaption>The stand on its own</figcaption>
               </figure>
               <figure>
-                <img src="/media/runs/desk-render.webp" width="960" height="640" loading="lazy" alt="The render: the same objects rebuilt in 3D, seen from the same place" />
-                <figcaption>What Zhiyin rendered</figcaption>
+                <img src="/media/runs/stand-in-use.webp" width="960" height="960" loading="lazy" alt="The same stand with the phone upright against the panel and the watch lying on its pillar" />
+                <figcaption>With the phone and watch</figcaption>
               </figure>
             </div>
             <div class="run__body">
               <p class="run__ask">
-                This is a photo of a desk. Rebuild it in 3D exactly as it is:
-                only the objects the photo shows, each at a realistic size and
-                in the same place, with the same colours and materials and the
-                same soft daylight. Printed pictures in the scene can be
-                plain stand-ins. Then take one picture from where the photo
-                was taken: same height, distance, direction and lens, camera
-                level, so that each object sits at the same spot in the frame
-                as in the photo. Save it as renders/desk_rebuild.png at 1920 x
-                1280. Before finishing, compare it with the photo and correct
-                what differs most.
+                Can you design a 3D-printable stand for my two chargers: a Qi2
+                magnetic charger for my Galaxy S25+, and the charger of my
+                Galaxy Watch 7 (Samsung's original, round, 29.3 mm across and
+                7.61 mm thick)? The phone should stand upright in portrait,
+                with the watch on its own pad beside it. Route both cables out
+                of sight to the back, make it clean and aesthetic, light on
+                material, and give me the STL, a picture of the stand on its
+                own, and one with the phone and watch in place.
               </p>
               <p class="run__did">
-                Looked at the photo attached to the request, built the table
-                and what stands on it in Blender, lit the scene, compared three
-                drafts with the photo, then rendered it from where the photo
-                was taken.
+                Asked about the Qi2 charger, the printer and where the watch
+                should sit, built the stand in Blender as one printable piece
+                with both cables run inside it, checked the exported STL was a
+                single closed shell, then rendered it alone and in use.
               </p>
               <dl class="run__facts">
-                <div><dt>Model</dt><dd>Claude Sonnet 5.5, at high effort</dd></div>
+                <div><dt>Model</dt><dd>DeepSeek V4.1 Flash, at high effort</dd></div>
                 <div><dt>Plugin</dt><dd>3D &amp; Rendering</dd></div>
-                <div><dt>Time</dt><dd>7 min 20 s</dd></div>
+                <div><dt>Time</dt><dd>42 min</dd></div>
               </dl>
-              <p class="run__cost"><strong>$0.86</strong> for the whole run</p>
+              <p class="run__cost"><strong>$0.25</strong> for the whole run</p>
             </div>
           </article>
         </div>
         <p class="runs__note" data-reveal>
           The first four used <span class="mono">deepseek/deepseek-v4.1-flash</span>
           through OpenRouter, and their costs are what OpenRouter reported. The
-          3D scene used <span class="mono">claude-sonnet-5-5</span> through
-          Anthropic's API, and its cost is counted from the tokens it used at
-          Anthropic's prices. The photo is by Pineapple Supply Co., released
-          under CC0.
+          stand used <span class="mono">deepseek-flash</span> through
+          DeepSeek's own API, and its cost is counted from the tokens it used
+          at DeepSeek's prices.
         </p>
       </section>
 
