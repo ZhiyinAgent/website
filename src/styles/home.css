@@ -1,0 +1,1195 @@
+/*
+ * The home page reads like a hanging scroll, and like the tune in the name's
+ * story: high mountains and flowing water painted at the opening, the work
+ * shown on mounted recordings down the middle, and the page ending at the
+ * water. Only recordings are mounted; everything else is written straight on
+ * the paper, divided by hairlines.
+ */
+
+/* ---- Sections ---------------------------------------------------------- */
+
+main > section:not(.opening, .theatre) {
+  margin-top: var(--section-gap);
+}
+
+.section-head {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  max-width: 760px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.section-head .label {
+  margin-bottom: 6px;
+}
+
+/* ---- The opening ------------------------------------------------------- */
+
+/* The first window: the landscape painted across its foot, the lockup and
+   the promise standing in the valley between the peaks. */
+.opening {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  min-height: calc(100svh - 64px);
+  padding-block: clamp(24px, 4svh, 56px) clamp(140px, 22svh, 220px);
+  overflow: clip;
+}
+
+/* The painting lies along the foot of the window, the river at its edge, and
+   is always shown whole from top to bottom: its upper fifth is bare paper,
+   so the opening may clip only that, never a peak. Across a window as wide as
+   the painting's own shape allows, the peaks run off both sides; a window
+   wider than that, for its height, gets the painting at that width, centred,
+   its sides fading into the paper. */
+.paint--landscape {
+  --land-width: calc((100svh - 64px) * 16 / 9 * 1.15);
+  --land-fade: min(10%, max(0px, 100vw - var(--land-width)));
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  width: min(100%, var(--land-width));
+  margin-inline: auto;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--land-fade),
+    #000 calc(100% - var(--land-fade)),
+    transparent
+  );
+}
+
+.opening__inner {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+/* The lockup, as on the trailer's title: the mark painted, the name beneath
+   it, then 知音 and its gloss. */
+.lockup {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin-bottom: clamp(28px, 4svh, 44px);
+}
+
+.paint--mark {
+  width: clamp(104px, 9vw + 60px, 168px);
+}
+
+.lockup__word {
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  line-height: 1;
+}
+
+.lockup__gloss {
+  margin-top: 2px;
+}
+
+.opening__title {
+  font-size: var(--size-h1);
+}
+
+.opening__lead {
+  max-width: 50ch;
+  margin-top: 18px;
+}
+
+.opening__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.opening__meta {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* The writing settles in after the brush, one part after another; the
+   painting is already being painted. */
+@media (prefers-reduced-motion: no-preference) {
+  .lockup__word,
+  .lockup__gloss,
+  .opening__title,
+  .opening__lead,
+  .opening__actions,
+  .opening__meta {
+    animation: settle 900ms var(--settle) backwards;
+  }
+
+  .lockup__word {
+    animation-delay: 600ms;
+  }
+
+  .lockup__gloss {
+    animation-delay: 760ms;
+  }
+
+  .opening__title {
+    animation-delay: 900ms;
+  }
+
+  .opening__lead {
+    animation-delay: 1000ms;
+  }
+
+  .opening__actions {
+    animation-delay: 1100ms;
+  }
+
+  .opening__meta {
+    animation-delay: 1200ms;
+  }
+}
+
+@media (max-height: 700px) {
+  .opening {
+    align-content: start;
+    padding-bottom: clamp(120px, 18svh, 180px);
+  }
+}
+
+/* ---- The trailer ------------------------------------------------------- */
+
+.theatre {
+  padding-top: 24px;
+}
+
+.film:not([data-sound]) video {
+  cursor: pointer;
+}
+
+.film[data-sound] [data-film-sound] {
+  visibility: hidden;
+}
+
+/* ---- The story --------------------------------------------------------- */
+
+.story {
+  --stage: calc(100svh - 64px);
+}
+
+.story__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(40px, 5vw, 80px);
+}
+
+.story__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each step is a tall stretch of page with its words in the middle, level
+   with the mount beside it, which holds while the step is read. The first
+   and last are as tall as the mount's stretch, so the words and the mount
+   arrive and leave together. The step being read is lit; the others wait. */
+.story__step {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  min-height: calc(var(--stage) * 0.66);
+  transition: opacity 400ms ease;
+}
+
+.story__step:first-child,
+.story__step:last-child {
+  min-height: var(--stage);
+}
+
+.js .story__step:not([data-active]) {
+  opacity: 0.32;
+}
+
+/* The step's number, written small in the display face. */
+.story__n {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+}
+
+.story__step h3 {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.story__step p {
+  max-width: 44ch;
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.story__screen {
+  position: sticky;
+  top: 64px;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  height: var(--stage);
+}
+
+/* The recordings lie on one another; the step's own crosses in over the one
+   before, which ends framed where it begins. */
+.story__picture video {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 450ms ease,
+    visibility 0s linear 450ms;
+}
+
+.story__picture video[data-active] {
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity 450ms ease,
+    visibility 0s;
+}
+
+/* Without the script, the first recording shows. */
+:root:not(.js) .story__picture video:first-child {
+  visibility: visible;
+  opacity: 1;
+}
+
+.story__bar .mount__title {
+  flex: 1 1 100%;
+}
+
+.story__screen:not([data-sped]) .story__sped {
+  display: none;
+}
+
+/* While a recording plays, the way on waits, quiet. Once it has ended, Replay
+   shows and the way on is painted in ink, its arrow nudging down. */
+.story__screen:not([data-ended]) .story__replay {
+  visibility: hidden;
+}
+
+.story__screen[data-ended] .story__next {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--ground);
+}
+
+.story__screen[data-ended] .story__next svg {
+  animation: nudge 1.4s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.story__inline {
+  display: none;
+}
+
+/* On a narrow window the mount cannot sit beside the words: the script
+   mounts each step's own recording under its words. */
+@media (max-width: 960px) {
+  .story__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .js .story__screen {
+    display: none;
+  }
+
+  .story__screen {
+    position: static;
+    height: auto;
+  }
+
+  .story__step,
+  .story__step:first-child,
+  .story__step:last-child {
+    min-height: 0;
+    padding-bottom: 56px;
+  }
+
+  .js .story__step:not([data-active]) {
+    opacity: 1;
+  }
+
+  .story__inline {
+    display: grid;
+    margin-top: 12px;
+  }
+}
+
+/* The controls copied onto a run's or a step's own mount. */
+.mount__label:not([data-ended]) .screen__replay {
+  display: none;
+}
+
+.mount__picture[data-run] video {
+  cursor: zoom-in;
+}
+
+/* ---- More runs: the hall ----------------------------------------------- */
+
+.runs {
+  scroll-margin-top: 88px;
+}
+
+/* Five mounted recordings, two to a row, the widest run across the whole
+   row. Under each, its colophon: the request as it was typed, what was
+   done, and the facts. */
+.hall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 5vw, 64px) clamp(24px, 3vw, 40px);
+}
+
+.run {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.run--wide {
+  grid-column: 1 / -1;
+}
+
+.run__colophon {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+/* The request as it was typed, in the app's message bubble. */
+.run__ask {
+  justify-self: start;
+  padding: 10px 14px;
+  border-radius: 16px 16px 4px 16px;
+  background: var(--wash-strong);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.run--wide .run__ask {
+  font-size: 0.9375rem;
+}
+
+.run__did {
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+/* The facts, in a row of small columns. */
+.run__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin: 2px 0 0;
+  font-size: 0.9375rem;
+}
+
+.run__facts div {
+  display: grid;
+  gap: 2px;
+}
+
+.run__facts dt {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.run__facts dd {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.run__facts strong {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* The stand cut open and the stand in use, side by side, standing straight
+   on the paper with no frame: cut out, they share one ground line, each
+   named beneath. */
+.run__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: 14px clamp(16px, 2.5vw, 32px);
+  margin-block: 4px 6px;
+}
+
+.run__pair figure {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  margin: 0;
+}
+
+.run__pair img {
+  width: 100%;
+  height: auto;
+}
+
+.run__pair figcaption {
+  color: var(--text-soft);
+  font-size: 0.875rem;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.run__pair-note {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.runs__note {
+  max-width: 78ch;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 899.98px) {
+  .hall {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The widest run, on a wide window, as one composition: the recording
+   beside the request and what was done, then the two pictures under the
+   recording, with the facts listed beside them. */
+@media (min-width: 900px) {
+  .run--wide {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "mount ask"
+      "mount did"
+      "pair facts";
+    gap: 14px clamp(28px, 3.5vw, 48px);
+  }
+
+  .run--wide .run__colophon {
+    display: contents;
+  }
+
+  .run--wide > .mount {
+    grid-area: mount;
+    align-self: start;
+  }
+
+  .run--wide .run__ask {
+    grid-area: ask;
+    align-self: start;
+  }
+
+  .run--wide .run__did {
+    grid-area: did;
+    align-self: start;
+  }
+
+  .run--wide .run__pair {
+    grid-area: pair;
+    margin-top: clamp(16px, 2vw, 28px);
+  }
+
+  .run--wide .run__facts {
+    grid-area: facts;
+    flex-direction: column;
+    align-self: center;
+    gap: 18px;
+    margin-top: clamp(16px, 2vw, 28px);
+    padding-left: 20px;
+    border-left: 1px solid var(--hairline);
+  }
+}
+
+/* Narrower, the request runs longer than the recording is tall: the
+   pictures come straight under the recording, and what was done and the
+   facts under the request, beside them. The recording's name takes its own
+   line on the mount, its model and controls the next. */
+@media (min-width: 900px) and (max-width: 1149.98px) {
+  .run--wide {
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      "mount ask"
+      "pair ask"
+      "pair did"
+      "pair facts";
+  }
+
+  .run--wide .run__pair {
+    align-self: start;
+    margin-top: 10px;
+  }
+
+  .run--wide .run__did {
+    margin-top: 4px;
+  }
+
+  .run--wide .run__facts {
+    flex-direction: row;
+    align-self: start;
+    gap: 12px 28px;
+    margin-top: 6px;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .run--wide .mount__title {
+    flex: 1 1 100%;
+  }
+}
+
+/* ---- A run, large ------------------------------------------------------ */
+
+/* As large as the window allows with its bar above it, never wider than the
+   recording's own pixels. */
+.viewer {
+  width: min(96vw, 1680px, calc((96svh - 84px) * 16 / 9));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--mount-line);
+  background: var(--mount);
+  color: var(--text);
+  box-shadow: var(--shadow-window);
+}
+
+.viewer[open] {
+  animation: viewer-in 320ms var(--settle);
+}
+
+.viewer[open]::backdrop {
+  animation: scrim-in 320ms ease-out;
+}
+
+.viewer::backdrop {
+  background: var(--scrim);
+  backdrop-filter: blur(6px);
+}
+
+@keyframes viewer-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+}
+
+@keyframes scrim-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+}
+
+html:has(.viewer[open]) {
+  overflow: hidden;
+}
+
+.viewer__bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 12px 12px 20px;
+}
+
+.viewer__text {
+  display: grid;
+  flex: 1;
+  gap: 3px;
+  min-width: 0;
+}
+
+.viewer__ask {
+  display: -webkit-box;
+  overflow: hidden;
+  font-weight: 600;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.viewer__note {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.viewer__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line-ink);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease;
+}
+
+.viewer__close:hover,
+.viewer__close:focus-visible {
+  border-color: var(--line-strong);
+  background: var(--ink-wash);
+}
+
+.viewer__close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.viewer__video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--footage);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewer[open],
+  .viewer[open]::backdrop {
+    animation: none;
+  }
+}
+
+/* ---- Plugins: the app's Plugins page ----------------------------------- */
+
+/* On a narrow window, and without scripts, each plugin's page sits under its
+   name, the list divided by hairlines. */
+.shelf {
+  display: grid;
+  border-top: 1px solid var(--hairline);
+}
+
+.shelf__caption {
+  display: none;
+}
+
+.shelf__tab {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 16px 4px;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  background: none;
+  color: var(--text-soft);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.shelf__tab:hover {
+  color: var(--text);
+}
+
+.shelf__tab:focus-visible {
+  outline-offset: -3px;
+}
+
+/* The chosen plugin: its name in full ink, a line of ink before it. */
+.shelf__tab[aria-expanded="true"] {
+  color: var(--text);
+}
+
+.shelf__name {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.shelf__name strong {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.shelf__name small {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.shelf__panel {
+  padding: 20px 4px 28px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* A plugin's page: its name, what it does, what it holds, and a request it
+   answers. */
+.brings {
+  display: grid;
+  gap: 22px;
+}
+
+.brings__head {
+  display: none;
+}
+
+.brings__does {
+  max-width: 36em;
+  color: var(--text-soft);
+  font-size: 1.125rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* What it holds, in columns divided by hairlines. */
+.brings__groups {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.brings__group {
+  padding: 16px 18px 18px 0;
+}
+
+.brings__group + .brings__group {
+  padding-left: 18px;
+  border-left: 1px solid var(--hairline);
+}
+
+.brings__group h4 {
+  display: flex;
+  gap: 9px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.brings__group h4 span {
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.brings__group ul {
+  display: grid;
+  gap: 7px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.brings__group li {
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+/* A request the plugin answers, in the app's message bubble. */
+.brings__ask {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.brings__ask .label {
+  font-size: 0.75rem;
+}
+
+.brings__ask p {
+  padding: 10px 14px;
+  border-radius: 16px 16px 4px 16px;
+  background: var(--wash-strong);
+  color: var(--text);
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .brings__groups {
+    grid-auto-flow: row;
+  }
+
+  .brings__group + .brings__group {
+    padding-left: 0;
+    border-top: 1px solid var(--hairline);
+    border-left: 0;
+  }
+}
+
+/* With the script it is the app's page: the plugins listed under their
+   caption, and the chosen one's page under the list on a narrow window,
+   beside it on a wide one. Every plugin's page lies in the same place, the
+   unchosen ones unseen, so the section is as tall as the tallest and does
+   not move the page as one is chosen. */
+.js .shelf {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto repeat(5, auto) auto;
+  border-top: 0;
+}
+
+.js .shelf__caption {
+  display: block;
+  grid-column: 1;
+  grid-row: 1;
+  padding: 0 0 12px;
+  font-size: 0.75rem;
+}
+
+.js .shelf__tab {
+  position: relative;
+  grid-column: 1;
+  padding: 12px 14px;
+}
+
+.js .shelf__tab:nth-of-type(1) { grid-row: 2; border-top: 1px solid var(--hairline); }
+.js .shelf__tab:nth-of-type(2) { grid-row: 3; }
+.js .shelf__tab:nth-of-type(3) { grid-row: 4; }
+.js .shelf__tab:nth-of-type(4) { grid-row: 5; }
+.js .shelf__tab:nth-of-type(5) { grid-row: 6; }
+
+.js .shelf__tab:hover {
+  background: var(--ink-wash);
+}
+
+.js .shelf__tab[aria-expanded="true"] {
+  background: var(--ink-wash);
+  box-shadow: inset 2px 0 0 var(--text);
+}
+
+.js .shelf__panel {
+  grid-row: 7;
+  grid-column: 1;
+  padding: 28px 0 0;
+  border-bottom: 0;
+}
+
+.js .shelf__panel[data-unchosen] {
+  visibility: hidden;
+}
+
+.js .brings__head {
+  display: grid;
+  gap: 10px;
+}
+
+.js .brings__head h3 {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .shelf__panel:not([data-unchosen]) .brings {
+    animation: settle 340ms var(--settle) backwards;
+  }
+}
+
+@media (min-width: 900px) {
+  .js .shelf {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    grid-template-rows: auto repeat(5, auto) 1fr;
+    column-gap: clamp(36px, 5vw, 72px);
+  }
+
+  .js .shelf__panel {
+    grid-row: 1 / -1;
+    grid-column: 2;
+    padding: 0;
+  }
+}
+
+.plugins__more {
+  margin-top: 20px;
+  color: var(--muted);
+}
+
+/* ---- Cost -------------------------------------------------------------- */
+
+/* The heading beside what is paid, written in rows. */
+.cost {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 32px clamp(36px, 5vw, 72px);
+  align-items: start;
+}
+
+.cost .section-head {
+  margin-bottom: 0;
+}
+
+.ledger {
+  margin: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.ledger__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 24px;
+  align-items: baseline;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.ledger dt {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.ledger dd {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.ledger dd:not(.ledger__figure) {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  max-width: 54ch;
+}
+
+.ledger .ledger__figure {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .cost {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- Open source: provenance ------------------------------------------- */
+
+.open__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 40px clamp(36px, 5vw, 72px);
+  align-items: start;
+}
+
+.open__grid .section-head {
+  margin-bottom: 0;
+}
+
+.open__grid .button {
+  margin-top: 8px;
+}
+
+/* How an installer is made, read in order, and the command that checks
+   it. */
+.provenance {
+  display: grid;
+  gap: 28px;
+}
+
+.provenance__chain {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: link;
+  border-top: 1px solid var(--hairline);
+}
+
+.provenance__chain li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 4px 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hairline);
+  counter-increment: link;
+}
+
+.provenance__chain li::before {
+  grid-row: 1 / 3;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.6;
+  content: counter(link);
+}
+
+.provenance__chain h3 {
+  font-size: 1.0625rem;
+}
+
+.provenance__chain p {
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+/* What is typed stays clean: the command stands above the grain. */
+.terminal {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 18px 20px 20px;
+  border: 1px solid var(--mount-line);
+  background: var(--panel);
+}
+
+.terminal .label {
+  font-size: 0.75rem;
+}
+
+.terminal pre {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.terminal__prompt {
+  margin-right: 6px;
+  color: var(--muted);
+}
+
+@media (max-width: 860px) {
+  .open__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- The name ---------------------------------------------------------- */
+
+/* The two characters written large in KaiTi, read top to bottom, and the
+   story beside them. */
+.name__grid {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: center;
+  padding-block: clamp(16px, 3vw, 32px);
+  border-block: 1px solid var(--hairline);
+}
+
+.name__glyphs {
+  color: var(--text);
+  font-family: var(--font-kai);
+  font-size: clamp(4rem, 6vw + 1rem, 6.5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  writing-mode: vertical-rl;
+}
+
+.name__text {
+  display: grid;
+  gap: 16px;
+  max-width: 720px;
+}
+
+.name__gloss {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.name__gloss .mono {
+  font-family: var(--font-display);
+}
+
+.name__text > p:last-child {
+  color: var(--text-soft);
+  font-size: var(--size-lead);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .name__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .name__glyphs {
+    writing-mode: horizontal-tb;
+  }
+}
+
+/* ---- Closing ----------------------------------------------------------- */
+
+.closing__inner {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.closing__mark {
+  width: clamp(96px, 8vw + 50px, 140px);
+  margin-bottom: 4px;
+}
+
+.closing h2 {
+  font-size: var(--size-h2);
+}
+
+.closing__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.closing__note {
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}

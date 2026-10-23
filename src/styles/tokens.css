@@ -1,0 +1,134 @@
+/*
+ * The app's own tokens, so the site and the app read as one product. The dark
+ * block is the default, as in the app and the trailer; the light block
+ * repaints the same names. No rule outside this file writes a literal colour.
+ *
+ * Red is the app's own accent: what a control is painted with (Download, as
+ * the app paints Allow), and nothing else. Everything drawn is ink: pale on
+ * the dark paper, dark on the light.
+ */
+:root {
+  color-scheme: dark;
+  --ground: #1b1918;
+  --ground-deep: #141211;
+  --panel: #0e0d0c;
+  --panel-raised: #1f1d1b;
+  --line: #2f2c29;
+  --line-strong: #44403c;
+  --text: #f1ece6;
+  --text-soft: #d4cdc5;
+  --muted: #9b9da2;
+  --red-fill: #e01f13;
+  --red-fill-hover: #f4291b;
+  --on-red: #ffffff;
+  --green: #5ed6a4;
+  --green-fill: rgba(94, 214, 164, 0.12);
+  --green-line: rgba(94, 214, 164, 0.35);
+  --wash-strong: rgba(255, 255, 255, 0.08);
+  --shadow-window:
+    0 40px 120px rgba(0, 0, 0, 0.6), 0 12px 32px rgba(0, 0, 0, 0.4);
+  --scrim: rgba(14, 13, 12, 0.72);
+
+  /* The paper's grain, laid over the ground in soft light, and the ground
+     darkening toward the edges of the window. */
+  --grain-ground: url("../assets/ink/grain-ground-dark.svg");
+  --vignette: radial-gradient(
+    ellipse 80% 70% at 55% 40%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.38) 100%
+  );
+  /* A light grain over what is read, blended into the words. */
+  --grain-text: url("../assets/ink/grain-text-dark.svg");
+  --grain-text-strength: 0.12;
+
+  /* A mount: the paper a recording rests on, a shade lighter than the ground
+     with a fine line round it, as the trailer mounts its footage. */
+  --mount: #232020;
+  --mount-line: #3a3633;
+  /* A hairline where the paper is only divided. */
+  --hairline: color-mix(in srgb, var(--line) 70%, transparent);
+  /* A control drawn in line, the ground showing through it. */
+  --line-ink: color-mix(in srgb, var(--text) 20%, transparent);
+  /* What is chosen, or hovered: a soft ink tint. */
+  --ink-tint: color-mix(in srgb, var(--text) 10%, transparent);
+  --ink-wash: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --ground: #eeeae4;
+    --ground-deep: #e4dfd8;
+    --panel: #f9f6f2;
+    --panel-raised: #fbf9f6;
+    --line: #d8d1c7;
+    --line-strong: #bfb6aa;
+    --text: #1d1a17;
+    --text-soft: #3b3632;
+    --muted: #5f6268;
+    --red-fill: #c42619;
+    --red-fill-hover: #a81f14;
+    --on-red: #ffffff;
+    --green: #107049;
+    --green-fill: rgba(16, 115, 75, 0.1);
+    --green-line: rgba(16, 115, 75, 0.35);
+    --wash-strong: rgba(0, 0, 0, 0.07);
+    --shadow-window:
+      0 40px 110px rgba(70, 50, 30, 0.2), 0 10px 28px rgba(70, 50, 30, 0.12);
+    --scrim: rgba(238, 234, 228, 0.8);
+
+    --grain-ground: url("../assets/ink/grain-ground-light.svg");
+    --vignette: radial-gradient(
+      ellipse 80% 70% at 55% 40%,
+      transparent 55%,
+      rgba(60, 40, 20, 0.1) 100%
+    );
+    --grain-text: url("../assets/ink/grain-text-light.svg");
+    --grain-text-strength: 0.09;
+    --mount: #f6f3ee;
+    --mount-line: #cfc7bc;
+  }
+}
+
+/* The Windows warning the guide draws: Windows's colours, in either theme. */
+:root {
+  --smartscreen: #0f4c8a;
+  --smartscreen-ink: #ffffff;
+  --smartscreen-line: rgba(255, 255, 255, 0.8);
+  /* The ground of recorded footage: the app in its dark theme. */
+  --footage: #0a0a0b;
+}
+
+/* Measurements and type, the same in either theme. */
+:root {
+  /* The app's faces. Windows has them; elsewhere the display face falls back
+     to a DIN-like web font shipped with the site, and the others to the
+     system's own. 知音 is written in KaiTi, as in the trailer. */
+  --font-display:
+    "Bahnschrift", "Barlow Semi Condensed", "Segoe UI Variable Display",
+    sans-serif;
+  --font-body:
+    "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-data: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace, monospace;
+  --font-kai:
+    "KaiTi", "楷体", "STKaiti", "Kaiti SC", "AR PL UKai CN", "Noto Serif SC",
+    serif;
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+
+  --page: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section-gap: clamp(96px, 13vw, 168px);
+
+  /* Display sizes on one scale. */
+  --size-h1: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --size-h2: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem);
+  --size-h3: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);
+  --size-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+
+  /* Ink settling: how a block of writing comes into place. */
+  --settle: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* The brush sweep: how many drawings it has, as painted. */
+  --sweep-frames: 16;
+}
