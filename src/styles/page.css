@@ -1,0 +1,143 @@
+/* Plain pages: privacy and the missing page. */
+
+.page {
+  display: grid;
+  gap: clamp(48px, 7vw, 80px);
+  max-width: 860px;
+  padding-top: clamp(36px, 6vw, 80px);
+}
+
+.page__head {
+  display: grid;
+  gap: 20px;
+}
+
+/* The head settles in as the page opens, one part after another. */
+@media (prefers-reduced-motion: no-preference) {
+  .page__head > *,
+  .page--missing > :not(.paint) {
+    animation: settle 600ms var(--settle) backwards;
+  }
+
+  .page__head > :nth-child(2),
+  .page--missing > :nth-child(2) {
+    animation-delay: 60ms;
+  }
+
+  .page__head > :nth-child(n + 3),
+  .page--missing > :nth-child(n + 3) {
+    animation-delay: 120ms;
+  }
+}
+
+.page h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 4rem);
+}
+
+.page__section {
+  display: grid;
+  gap: 20px;
+}
+
+.page__section h2 {
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+}
+
+/* Rows divided by hairlines, as the app sets out its settings. */
+.page__list {
+  display: grid;
+  margin: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.page__list > div {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 6px 28px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.page__list dt {
+  font-weight: 600;
+}
+
+.page__list dd {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+
+.page__list a {
+  color: var(--text);
+  text-decoration-color: var(--line-ink);
+  text-underline-offset: 3px;
+}
+
+.page code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--wash-strong);
+  font-family: var(--font-data);
+  font-size: 0.875em;
+}
+
+@media (max-width: 640px) {
+  .page__list > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The missing page stands where the trailer opens: the landscape painted
+   across the foot of the window, the words above the valley. */
+.missing {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  min-height: calc(100svh - 64px);
+  overflow: clip;
+}
+
+/* Shown whole from top to bottom, as on the home page: only its bare upper
+   paper may be clipped, and a window too wide for its height gets it
+   centred, its sides fading into the paper. */
+.missing .paint--landscape {
+  --land-width: calc((100svh - 64px) * 16 / 9 * 1.15);
+  --land-fade: min(10%, max(0px, 100vw - var(--land-width)));
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  width: min(100%, var(--land-width));
+  margin-inline: auto;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--land-fade),
+    #000 calc(100% - var(--land-fade)),
+    transparent
+  );
+}
+
+.missing + .site-footer {
+  margin-top: 0;
+}
+
+.page--missing {
+  gap: 20px;
+  justify-items: center;
+  padding-block: 40px clamp(200px, 30svh, 300px);
+  text-align: center;
+}
+
+.page--missing .lead {
+  max-width: 44ch;
+}
+
+.page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}

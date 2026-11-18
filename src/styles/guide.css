@@ -1,0 +1,579 @@
+/* The guide's head, with the opening's peaks painted faintly along its foot,
+   as the app's pages carry far ranges at theirs. */
+.guide-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 20px;
+  padding-block: clamp(36px, 6vw, 80px) clamp(120px, 16vw, 200px);
+}
+
+.paint--range {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: clamp(140px, 20vw, 260px);
+  opacity: 0.55;
+  mask-image: linear-gradient(to top, transparent, var(--ground) 45%);
+}
+
+.paint--range img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* The head settles in as the page opens, one part after another. */
+@media (prefers-reduced-motion: no-preference) {
+  .guide-hero > :not(.paint) {
+    animation: settle 600ms var(--settle) backwards;
+  }
+
+  .guide-hero > :nth-child(3) {
+    animation-delay: 60ms;
+  }
+
+  .guide-hero > :nth-child(4) {
+    animation-delay: 120ms;
+  }
+
+  .guide-hero > :nth-child(n + 5) {
+    animation-delay: 180ms;
+  }
+}
+
+.guide-hero h1 {
+  max-width: 16em;
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 4rem);
+}
+
+.needs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.needs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+}
+
+.needs svg {
+  width: 16px;
+  height: 16px;
+  color: var(--green);
+}
+
+/* ---- Layout: the steps beside their list ------------------------------- */
+
+.guide__layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+
+.toc {
+  position: sticky;
+  top: 88px;
+  display: grid;
+  gap: 18px;
+}
+
+.toc ol {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.toc li {
+  counter-increment: step;
+}
+
+.toc a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+  padding: 0 12px 0 10px;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.toc ol a::before {
+  flex: 0 0 auto;
+  min-width: 1.4em;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  content: counter(step);
+}
+
+.toc a:hover {
+  background: var(--ink-wash);
+  color: var(--text);
+}
+
+/* The step being read: its name in full ink, a line of ink before it, as the
+   app marks the open conversation. */
+.toc ol a[aria-current="step"] {
+  background: var(--ink-wash);
+  box-shadow: inset 2px 0 0 var(--text);
+  color: var(--text);
+}
+
+.toc a[aria-current="step"]::before {
+  color: var(--text);
+}
+
+.toc__extra {
+  padding-left: 12px;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+  .guide__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .toc {
+    display: none;
+  }
+}
+
+/* ---- One step ---------------------------------------------------------- */
+
+.steps-flow {
+  display: grid;
+  gap: clamp(56px, 8vw, 96px);
+  min-width: 0;
+}
+
+.step {
+  display: grid;
+  gap: 20px;
+  max-width: 760px;
+}
+
+.step__head {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* The step's number, written in the display face. */
+.step__number {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.step h2,
+.trouble h2 {
+  font-size: clamp(1.625rem, 1.3rem + 1.3vw, 2.25rem);
+}
+
+.step__intro,
+.step > p {
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.step__define {
+  padding: 12px 18px;
+  border-left: 1px solid var(--text);
+  background: var(--ink-wash);
+}
+
+.step__sub {
+  margin-top: 8px;
+}
+
+.step__note {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.step a:not(.button),
+.trouble a {
+  color: var(--text);
+  text-decoration-color: var(--line-ink);
+  text-underline-offset: 3px;
+}
+
+.step a:not(.button):hover,
+.trouble a:hover {
+  text-decoration-color: var(--text);
+}
+
+code,
+kbd {
+  font-family: var(--font-data);
+  font-size: 0.875em;
+}
+
+code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--wash-strong);
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0 6px;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--panel-raised);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* The app's own red button, and its green state. */
+.ui--red {
+  border-color: var(--red-fill);
+  background: var(--red-fill);
+  color: var(--on-red);
+}
+
+.ui--green {
+  border-color: var(--green-line);
+  background: var(--green-fill);
+  color: var(--green);
+}
+
+/* Numbered substeps: the order is the order you do them in. */
+.step__list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: sub;
+}
+
+.step__list > li {
+  position: relative;
+  padding-left: 40px;
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  counter-increment: sub;
+}
+
+.step__list > li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.7rem;
+  content: counter(sub);
+}
+
+.aside {
+  display: grid;
+  gap: 10px;
+  padding: 16px 0 18px;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.aside h3 {
+  font-size: 1rem;
+}
+
+.aside ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 1.1em;
+  color: var(--text-soft);
+}
+
+.checked {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+/* ---- The Windows warning, drawn plainly so it is recognised ------------ */
+
+.smartscreen {
+  display: grid;
+  gap: 10px;
+  max-width: 460px;
+  margin: 4px 0 0;
+}
+
+.smartscreen__panel {
+  display: grid;
+  gap: 10px;
+  padding: 22px 24px 18px;
+  border-radius: 6px;
+  background: var(--smartscreen);
+  color: var(--smartscreen-ink);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.smartscreen__title {
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.smartscreen__link {
+  text-decoration: underline;
+}
+
+.smartscreen__app {
+  opacity: 0.85;
+}
+
+.smartscreen__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.smartscreen__buttons span {
+  min-width: 96px;
+  padding: 5px 14px;
+  border: 1px solid var(--smartscreen-line);
+  text-align: center;
+}
+
+/* The button to look for, ringed. */
+.smartscreen__run {
+  outline: 2px solid var(--smartscreen-ink);
+  outline-offset: 3px;
+}
+
+.smartscreen figcaption {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* ---- Facts, services and the featured connector ------------------------ */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 24px;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.fact,
+.service {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 16px 0 18px;
+}
+
+.fact + .fact,
+.service + .service {
+  padding-left: 24px;
+  border-left: 1px solid var(--hairline);
+}
+
+.fact h3,
+.service h3 {
+  font-size: 1rem;
+}
+
+.fact p,
+.service p {
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+@media (max-width: 760px) {
+  .facts,
+  .services {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fact + .fact,
+  .service + .service {
+    padding-left: 0;
+    border-top: 1px solid var(--hairline);
+    border-left: 0;
+  }
+}
+
+.feature-card {
+  display: grid;
+  gap: 18px;
+  padding: clamp(18px, 3vw, 26px) 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.feature-card > p {
+  color: var(--text-soft);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.feature-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+
+.feature-card__head h3 {
+  font-size: 1.375rem;
+}
+
+.feature-card__badge {
+  color: var(--green);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.plugin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--hairline);
+}
+
+.plugin-grid li {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 16px 0 18px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* An odd one out takes the whole row instead of leaving a gap beside it. */
+.plugin-grid li:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.plugin-grid h3 {
+  font-size: 1rem;
+}
+
+.plugin-grid p {
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .plugin-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Rows divided by hairlines, as the app sets out its settings. */
+.decisions {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.decisions > div {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 8px 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.decisions dd {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .decisions > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- Trouble ----------------------------------------------------------- */
+
+.trouble {
+  display: grid;
+  gap: 20px;
+  max-width: 760px;
+  padding-top: clamp(24px, 4vw, 36px);
+  border-top: 1px solid var(--line-strong);
+}
+
+.trouble__list {
+  display: grid;
+  margin: 0;
+}
+
+.trouble__list > div {
+  display: grid;
+  gap: 6px;
+  padding-block: 16px;
+  border-top: 1px solid var(--hairline);
+}
+
+.trouble__list dt {
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.trouble__list dd {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.trouble__more {
+  color: var(--muted);
+}

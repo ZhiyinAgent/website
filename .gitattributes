@@ -1,0 +1,11 @@
+# Line endings: LF in the repository and the working tree.
+* text=auto eol=lf
+
+# Binary: never touch.
+*.mp4 binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

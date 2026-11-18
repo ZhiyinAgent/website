@@ -1,0 +1,771 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 88px;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* The paper, as in the app and the trailer: warm, grained, darker toward the
+   edges of the window. A layer of its own, fixed behind everything, so
+   scrolling never paints it again. */
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    var(--grain-ground) 0 0 / 200px 200px,
+    var(--vignette) 0 0 / 100% 100% no-repeat,
+    var(--ground);
+  background-blend-mode: soft-light, normal;
+  content: "";
+  pointer-events: none;
+}
+
+/* A light grain over what is read, blended into the words. Recorded footage
+   and the commands to type stand above it and stay clean. */
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: var(--grain-text) 0 0 / 160px 160px;
+  content: "";
+  opacity: var(--grain-text-strength);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--text);
+  color: var(--ground);
+}
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--text);
+  color: var(--ground);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Layout ------------------------------------------------------------ */
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--page));
+  margin-inline: auto;
+}
+
+/* ---- Type ------------------------------------------------------------- */
+
+/* The display voice is the trailer's: Bahnschrift at its natural width,
+   semibold, a little tracked, never shouting. */
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--size-h1);
+}
+
+h2 {
+  font-size: var(--size-h2);
+}
+
+h3 {
+  font-size: var(--size-h3);
+  letter-spacing: 0.015em;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+}
+
+.lead {
+  max-width: 58ch;
+  color: var(--text-soft);
+  font-size: var(--size-lead);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* A small caption, as the trailer sets the line on a mount: display face,
+   tracked wide. */
+.label {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* The wordmark, as on the trailer's title: capitals, widely tracked. The
+   tracking after the last letter is taken back so the word sits centred. */
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  text-transform: uppercase;
+}
+
+/* The name in KaiTi, as in the trailer, with its gloss in small Latin. */
+.gloss {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.7em;
+  color: var(--text-soft);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.gloss [lang] {
+  font-family: var(--font-kai);
+  font-size: 1.35em;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  margin-right: -0.25em;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.mono {
+  font-family: var(--font-data);
+}
+
+/* A label as it appears in the app: the name of a button or a page, set the
+   way the app sets it, so it can be found on screen. */
+.ui {
+  display: inline-block;
+  padding: 0 0.42em;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background: var(--ink-wash);
+  color: var(--text);
+  font-size: 0.9em;
+  font-weight: 600;
+  line-height: 1.55;
+  white-space: nowrap;
+}
+
+/* ---- Buttons ----------------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--line-ink);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.button:hover {
+  border-color: var(--line-strong);
+  background: var(--ink-wash);
+  color: var(--text);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+/* The app's own accent: the one button painted red, as the app paints
+   Allow. */
+.button--red {
+  border-color: var(--red-fill);
+  background: var(--red-fill);
+  color: var(--on-red);
+}
+
+.button--red:hover {
+  border-color: var(--red-fill-hover);
+  background: var(--red-fill-hover);
+  color: var(--on-red);
+}
+
+/* A download not published yet: nothing to act on, so no red. */
+[data-closed],
+.button[data-closed],
+.button[data-closed]:hover {
+  border-color: var(--line-ink);
+  background: transparent;
+  color: var(--muted);
+  cursor: default;
+}
+
+.button--large {
+  min-height: 54px;
+  padding: 0 28px;
+  border-radius: 12px;
+  font-size: 1.0625rem;
+}
+
+.button--small {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 0.875rem;
+}
+
+/* ---- A recording, mounted ---------------------------------------------- */
+
+/* A recording rests on the ground like a mounted painting, as in the
+   trailer: paper a shade lighter than the ground, a fine line round it, the
+   footage inset, and the label on the mount's foot, so nothing is laid over
+   the footage. The mount stands above the grain laid over what is read. */
+.mount {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  margin: 0;
+  padding: clamp(10px, 1.2vw, 16px);
+  border: 1px solid var(--mount-line);
+  background: var(--mount);
+}
+
+.mount__picture {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line-strong);
+  background: var(--footage);
+}
+
+.mount__picture video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--footage);
+}
+
+/* The mount's label: what the picture is, on the left; who or what, on the
+   right, as the trailer writes the model's name. Controls stand with it. */
+.mount__label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 18px;
+  min-height: 44px;
+  padding: 10px 2px 0;
+  color: var(--text-soft);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+/* On a phone the label's parts sit closer, so a long model name still shares
+   its line with the controls. */
+@media (max-width: 480px) {
+  .mount__label {
+    column-gap: 12px;
+  }
+}
+
+.mount__title {
+  color: var(--text);
+}
+
+.mount__note {
+  color: var(--muted);
+}
+
+.mount__actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* A control on the mount, drawn in line. */
+.mount__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 0 13px;
+  border: 1px solid var(--line-ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-soft);
+  font: 600 0.8125rem / 1 var(--font-body);
+  letter-spacing: 0;
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.mount__action:hover {
+  border-color: var(--line-strong);
+  background: var(--ink-wash);
+  color: var(--text);
+}
+
+.mount__action svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+/* ---- Paintings --------------------------------------------------------- */
+
+/* A painting from the ink simulation: an animated picture that is painted
+   once, drawing by drawing, and then holds; or, with reduced motion, the
+   finished painting alone. Its ink is cream on the dark paper and dark on the
+   light, so each comes in two renditions, chosen by the page. */
+.paint {
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.paint img {
+  width: 100%;
+  height: auto;
+}
+
+/* ---- Header ------------------------------------------------------------ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.site-header[data-scrolled] {
+  border-bottom-color: var(--hairline);
+  background: color-mix(in srgb, var(--ground) 86%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 64px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand svg {
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+
+.brand .wordmark {
+  font-size: 1.0625rem;
+  letter-spacing: 0.26em;
+  margin-right: -0.26em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.site-nav__link {
+  position: relative;
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.site-nav__link:hover {
+  background: var(--ink-wash);
+  color: var(--text);
+}
+
+/* The page you are on: a line of ink under its name. */
+.site-nav__link[aria-current="page"] {
+  color: var(--text);
+}
+
+.site-nav__link[aria-current="page"]::after {
+  position: absolute;
+  right: 12px;
+  bottom: 2px;
+  left: 12px;
+  height: 1px;
+  background: var(--text);
+  content: "";
+}
+
+.site-nav__link svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.site-nav .button {
+  margin-left: 8px;
+}
+
+.site-nav__short {
+  display: none;
+}
+
+/* On a phone the guide link shortens, and GitHub keeps only its mark; the
+   long names stay for screen readers. */
+@media (max-width: 560px) {
+  .site-nav__link .site-nav__word,
+  .site-nav__long {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .site-nav__short {
+    display: inline;
+  }
+
+  .site-nav .button {
+    margin-left: 2px;
+  }
+}
+
+/* The narrowest phones: the header tightens so it still fits on one line. */
+@media (max-width: 360px) {
+  .site-header__bar {
+    gap: 10px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand .wordmark {
+    letter-spacing: 0.16em;
+    margin-right: -0.16em;
+  }
+
+  .site-nav {
+    gap: 0;
+  }
+
+  .site-nav__link {
+    padding-inline: 6px;
+  }
+
+  .site-nav .button {
+    padding-inline: 10px;
+  }
+}
+
+/* ---- Footer ------------------------------------------------------------ */
+
+/* The foot of the scroll, on the deeper ground of the app's sidebar. The page
+   ends at the water: the river from the opening, painted along the foot, and
+   as it comes into view a drop falls into it and its rings die away. */
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  margin-top: var(--section-gap);
+  overflow: clip;
+  border-top: 1px solid var(--hairline);
+  background:
+    var(--grain-ground) 0 0 / 200px 200px,
+    var(--vignette) 0 0 / 100% 100% no-repeat,
+    var(--ground-deep);
+  background-blend-mode: soft-light, normal;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 40px 32px;
+  padding-block: 56px 40px;
+}
+
+.site-footer__about p {
+  max-width: 34ch;
+  margin-top: 14px;
+}
+
+.site-footer h2 {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.site-footer ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer a {
+  color: var(--text-soft);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.site-footer a:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 20px 28px;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.875rem;
+}
+
+/* The water: the rings where the drop fell, then the river's rows, painted
+   out from where it fell once the rings have died away. */
+.site-footer__water {
+  position: relative;
+  width: min(100%, 1440px);
+  margin: 8px auto 0;
+  opacity: 0.85;
+}
+
+.js .site-footer__water:not([data-calm]) .paint--water {
+  opacity: 0;
+  clip-path: inset(0 50%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-footer__water .paint--water {
+    transition:
+      opacity 1.4s ease-out,
+      clip-path 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+.site-footer__water .paint--ripple {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  width: min(94%, 1360px);
+  transform: translateX(-50%);
+}
+
+@media (max-width: 820px) {
+  .site-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-footer__about {
+    grid-column: 1 / -1;
+  }
+
+  /* The address takes a whole line rather than breaking inside it. */
+  .site-footer__contact {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---- Motion ------------------------------------------------------------ */
+
+/* Writing settles into place once, when it first comes into view: it rises a
+   little and comes into focus. Without script, or with reduced motion, it is
+   simply there. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 800ms var(--settle),
+    transform 800ms var(--settle);
+}
+
+.js [data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+/* A mounted recording arrives under a brush: the matte is the trailer's
+   sweep, painted by the simulation and shown a drawing at a time, and what
+   it has covered shows through. The matte is a sprite sheet, one drawing
+   under another, that the page steps through as a mask; once the last
+   drawing has closed, the mask is taken off. */
+.js [data-matte="sweep"] {
+  mask-image: url("/ink/sweep.webp");
+  mask-repeat: no-repeat;
+  mask-position: 0 0;
+  mask-size: 100% calc(var(--sweep-frames) * 100%);
+}
+
+.js [data-matte="sweep"][data-shown] {
+  animation: matte 1.3s steps(16, jump-none) forwards;
+}
+
+.js [data-matte][data-settled] {
+  mask: none;
+  animation: none;
+}
+
+@keyframes matte {
+  to {
+    mask-position: 0 100%;
+  }
+}
+
+/* Writing settles like ink as a page opens. */
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js [data-matte] {
+    mask: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zhiyin-website",
+  "compatibility_date": "2026-10-08",
+  // A static site, with no Worker code: requests to it are static assets. The
+  // videos are served from R2, at media.zhiyinagent.app.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [{ "pattern": "zhiyinagent.app", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": true
+}

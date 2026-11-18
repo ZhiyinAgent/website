@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <script>document.documentElement.classList.add("js")</script>
+    <title>Page not found · Zhiyin</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <meta name="theme-color" content="#1b1918" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eeeae4" media="(prefers-color-scheme: light)" />
+    <script type="module" src="/src/scripts/page.ts"></script>
+  </head>
+  <body>
+    <!-- @partial sprite -->
+    <!-- @partial header -->
+
+    <main id="main" class="missing">
+      <picture class="paint paint--landscape" aria-hidden="true">
+        <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="/ink/landscape-light-still.webp" />
+        <source media="(prefers-reduced-motion: reduce)" srcset="/ink/landscape-still.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="/ink/landscape-light.webp" />
+        <img src="/ink/landscape.webp" width="1152" height="648" alt="" decoding="async" />
+      </picture>
+      <div class="page page--missing wrap">
+        <p class="label mono">404</p>
+        <h1>This page isn't here.</h1>
+        <p class="lead">
+          The address may be mistyped, or the page has moved. Everything on the
+          site is reachable from the home page.
+        </p>
+        <div class="page__actions">
+          <a class="button button--red" href="/">Go to the home page</a>
+          <a class="button" href="/guide/">Open the setup guide</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- @partial footer -->
+  </body>
+</html>

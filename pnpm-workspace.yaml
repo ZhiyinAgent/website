@@ -1,0 +1,5 @@
+# Build scripts allowed to run: esbuild and workerd fetch the native binaries
+# Wrangler uses to bundle and to run the site locally.
+allowBuilds:
+  esbuild: true
+  workerd: true
